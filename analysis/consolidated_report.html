@@ -1,0 +1,475 @@
+<title>DOU Foods Email Audit</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,500&display=swap');
+
+  :root {
+    --bg: #FAFAF7;
+    --surface: #F0EFE9;
+    --surface-alt: #E6E4DC;
+    --text: #1A1A18;
+    --text-muted: #6B6960;
+    --accent: #D94B0E;
+    --accent-light: #FFF0E8;
+    --accent-dark: #B33A07;
+    --agree: #2D7A4F;
+    --agree-bg: #E8F5EE;
+    --disagree: #B33A07;
+    --disagree-bg: #FFF0E8;
+    --border: #D5D3CA;
+    --cmo-tag: #5B3E96;
+    --cmo-tag-bg: #F0ECF7;
+    --analyst-tag: #0E6B8D;
+    --analyst-tag-bg: #E6F3F8;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #141412;
+      --surface: #1E1E1A;
+      --surface-alt: #2A2A24;
+      --text: #E8E7E2;
+      --text-muted: #9E9D94;
+      --accent: #E8652E;
+      --accent-light: #2A1A10;
+      --accent-dark: #F08050;
+      --agree: #4DAA72;
+      --agree-bg: #162018;
+      --disagree: #E8652E;
+      --disagree-bg: #2A1A10;
+      --border: #3A3930;
+      --cmo-tag: #A788D4;
+      --cmo-tag-bg: #1E1628;
+      --analyst-tag: #5BB8D8;
+      --analyst-tag-bg: #0E1C22;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #141412;
+    --surface: #1E1E1A;
+    --surface-alt: #2A2A24;
+    --text: #E8E7E2;
+    --text-muted: #9E9D94;
+    --accent: #E8652E;
+    --accent-light: #2A1A10;
+    --accent-dark: #F08050;
+    --agree: #4DAA72;
+    --agree-bg: #162018;
+    --disagree: #E8652E;
+    --disagree-bg: #2A1A10;
+    --border: #3A3930;
+    --cmo-tag: #A788D4;
+    --cmo-tag-bg: #1E1628;
+    --analyst-tag: #5BB8D8;
+    --analyst-tag-bg: #0E1C22;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    padding-inline: 24px;
+    padding-block: 40px 80px;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    text-wrap: balance;
+    line-height: 1.2;
+  }
+
+  h1 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 800;
+    margin: 0 0 8px;
+    color: var(--text);
+  }
+
+  .subtitle {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    margin: 0 0 12px;
+  }
+
+  .meta-line {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 2px solid var(--accent);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+  }
+
+  h2 {
+    font-size: 1.45rem;
+    font-weight: 700;
+    margin: 48px 0 20px;
+    color: var(--text);
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 28px 0 12px;
+    color: var(--text);
+  }
+
+  p { margin: 0 0 14px; }
+
+  .score-strip {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
+  }
+  .score-card {
+    flex: 1 1 160px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 18px 20px;
+    min-width: 140px;
+  }
+  .score-card .label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+  .score-card .value {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .score-card .note {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 2px 8px;
+    border-radius: 3px;
+    vertical-align: middle;
+  }
+  .tag-cmo {
+    background: var(--cmo-tag-bg);
+    color: var(--cmo-tag);
+  }
+  .tag-analyst {
+    background: var(--analyst-tag-bg);
+    color: var(--analyst-tag);
+  }
+
+  .coincidence-list, .contradiction-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 16px 0 24px;
+  }
+
+  .item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px 20px;
+    border-left: 3px solid var(--agree);
+  }
+  .item.disagree {
+    border-left-color: var(--disagree);
+  }
+
+  .item .item-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+  .item .item-body {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+  .item .item-body strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .actions-section {
+    margin-top: 48px;
+  }
+
+  .action-group-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 16px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .action-group-header h3 {
+    margin: 0;
+    border: none;
+    padding: 0;
+  }
+
+  .action-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 0 14px;
+  }
+
+  .action-rank {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--accent);
+    grid-row: 1 / 3;
+    padding-top: 2px;
+  }
+  .action-title {
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .action-detail {
+    font-size: 0.84rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .verdict-box {
+    background: var(--accent-light);
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 32px 0;
+  }
+  .verdict-box p {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+  .verdict-box strong {
+    color: var(--accent);
+  }
+
+  .legend {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+  .legend span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .legend .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .dot-agree { background: var(--agree); }
+  .dot-disagree { background: var(--disagree); }
+
+  @media (max-width: 500px) {
+    body { padding-inline: 16px; }
+    .score-card { flex: 1 1 100%; }
+    .action-card { grid-template-columns: 28px 1fr; }
+  }
+</style>
+
+<h1>DOU Foods &mdash; Audit cruzado de Email Marketing</h1>
+<p class="subtitle">Dos analistas independientes. Un mismo documento. Cero contacto entre ellos.</p>
+<div class="meta-line">
+  <span><span class="tag tag-cmo">CMO</span> Chief Marketing Officer &middot; 15+ a&ntilde;os D2C</span>
+  <span><span class="tag tag-analyst">Analista</span> Email Marketing Specialist &middot; 10+ a&ntilde;os Klaviyo</span>
+  <span>Septiembre 2026</span>
+</div>
+
+<div class="score-strip">
+  <div class="score-card">
+    <div class="label">Nota global</div>
+    <div class="value">6 / 10</div>
+    <div class="note">Ambos coinciden</div>
+  </div>
+  <div class="score-card">
+    <div class="label">Veredicto compartido</div>
+    <div class="value">Buen copy, infraestructura d&eacute;bil</div>
+  </div>
+  <div class="score-card">
+    <div class="label">Coincidencias clave</div>
+    <div class="value">9</div>
+    <div class="note">De 12 puntos evaluados</div>
+  </div>
+  <div class="score-card">
+    <div class="label">Contradicciones</div>
+    <div class="value">3</div>
+    <div class="note">Diferencias de enfoque</div>
+  </div>
+</div>
+
+<div class="verdict-box">
+  <p><strong>Veredicto:</strong> Ambos analistas llegan a la misma conclusi&oacute;n central sin haberse visto. La estrategia de DOU Foods es un <strong>plan de contenidos de email con buen copywriting</strong>, pero le falta la infraestructura t&eacute;cnica (segmentaci&oacute;n, deliverability, automatizaciones cr&iacute;ticas) para funcionar como un <strong>canal serio de revenue</strong>. El mes de noviembre es una bomba de tiempo sin frequency capping. Y el programa DOU Gang es narrativa sin mec&aacute;nica.</p>
+</div>
+
+<h2>Coincidencias &mdash; donde ambos dicen lo mismo</h2>
+<div class="legend">
+  <span><span class="dot dot-agree"></span> Acuerdo total</span>
+</div>
+<div class="coincidence-list">
+  <div class="item">
+    <div class="item-title">1. La voz de marca es el activo m&aacute;s fuerte</div>
+    <div class="item-body"><span class="tag tag-cmo">CMO</span> &ldquo;Marca con personalidad, no un ecommerce gen&eacute;rico de alfajores.&rdquo; <span class="tag tag-analyst">Analista</span> &ldquo;Voz consistente, argentina, con humor y sin caer en gen&eacute;rico.&rdquo; Ambos lo reconocen como el mejor activo del programa.</div>
+  </div>
+  <div class="item">
+    <div class="item-title">2. Noviembre es una bomba de tiempo</div>
+    <div class="item-body">Ambos calculan <strong>5-6 campa&ntilde;as + flujos autom&aacute;ticos</strong> en el mismo mes, sin ninguna regla de supresi&oacute;n ni frequency capping. El CMO lo ve como riesgo de bajas masivas; el Analista lo cuantifica como da&ntilde;o al sender score justo en la temporada de mayor revenue.</div>
+  </div>
+  <div class="item">
+    <div class="item-title">3. Falta Browse Abandonment &mdash; la ausencia m&aacute;s costosa</div>
+    <div class="item-body">Los dos lo identifican como el flujo faltante de mayor impacto. El volumen de <code>Viewed Product</code> es varias veces mayor al de <code>Started Checkout</code>, y hoy esa audiencia se pierde completamente.</div>
+  </div>
+  <div class="item">
+    <div class="item-title">4. DOU Gang es narrativa sin mec&aacute;nica</div>
+    <div class="item-body">Ambos detectan lo mismo: se mencionan coins en todos lados, pero nunca se cuantifica la conversi&oacute;n ($1 = X coins), no hay balance din&aacute;mico visible en los emails, no hay tiers, no hay expiraci&oacute;n, y el referido est&aacute; subutilizado como P.D. en un solo email.</div>
+  </div>
+  <div class="item">
+    <div class="item-title">5. No hay Sunset / Winback ni higiene de lista</div>
+    <div class="item-body">El Flujo de Recompra muere en el d&iacute;a 35. Despu&eacute;s de eso, los clientes inactivos (60, 90, 120+ d&iacute;as) no tienen ning&uacute;n tratamiento. Tampoco hay mecanismo para limpiar contactos que nunca abren, lo que degrada la deliverability de toda la base.</div>
+  </div>
+  <div class="item">
+    <div class="item-title">6. Segmentaci&oacute;n casi inexistente</div>
+    <div class="item-body">No hay segmentos por: sabor comprado, engagement, CLV, geograf&iacute;a, ni canal de adquisici&oacute;n. Todo el mundo recibe el mismo mensaje. El Analista suma que faltan Conditional Splits en todos los flujos de Klaviyo.</div>
+  </div>
+  <div class="item">
+    <div class="item-title">7. Sin framework de m&eacute;tricas ni KPIs</div>
+    <div class="item-body">Cero objetivos num&eacute;ricos definidos. Ambos proponen <strong>Revenue per Recipient (RPR)</strong> como m&eacute;trica primaria en vez de Open Rate (distorsionado por Apple MPP). Benchmark: 30-40% del revenue total de ecommerce deber&iacute;a venir de email.</div>
+  </div>
+  <div class="item">
+    <div class="item-title">8. Riesgo de rese&ntilde;as negativas sin interceptar</div>
+    <div class="item-body">El Flujo 3.2 pide rese&ntilde;a directamente sin bifurcaci&oacute;n previa. Un cliente insatisfecho puede dejar una rese&ntilde;a p&uacute;blica negativa que la marca podr&iacute;a haber interceptado con un paso previo de &ldquo;&iquest;todo bien?&rdquo;</div>
+  </div>
+  <div class="item">
+    <div class="item-title">9. Falta cross-sell entre sabores</div>
+    <div class="item-body">DOU tiene 3 sabores + MIX. Quien compr&oacute; &Ntilde;OM nunca recibe una sugerencia autom&aacute;tica de probar NT o XD. Es el upsell m&aacute;s obvio del cat&aacute;logo y no est&aacute; automatizado.</div>
+  </div>
+</div>
+
+<h2>Contradicciones &mdash; donde difieren</h2>
+<div class="legend">
+  <span><span class="dot dot-disagree"></span> Perspectivas distintas</span>
+</div>
+<div class="contradiction-list">
+  <div class="item disagree">
+    <div class="item-title">1. Acci&oacute;n #1 m&aacute;s urgente: &iquest;Suscripci&oacute;n o Browse Abandonment?</div>
+    <div class="item-body"><span class="tag tag-cmo">CMO</span> Prioriza crear un <strong>modelo de suscripci&oacute;n/recompra autom&aacute;tica</strong> porque cambia el negocio de transaccional a recurrente y es el mayor lever de CLV. <span class="tag tag-analyst">Analista</span> Prioriza <strong>Browse Abandonment + 3er email de carrito con descuento real</strong> porque es la brecha de mayor volumen de tr&aacute;fico cualificado sin touchpoint. <strong>Traducci&oacute;n:</strong> el CMO piensa en modelo de negocio; el Analista piensa en revenue inmediato del canal. Ambos tienen raz&oacute;n en su l&oacute;gica &mdash; la suscripci&oacute;n es un cambio estructural m&aacute;s grande pero m&aacute;s lento; el Browse Abandonment se implementa en 1-2 semanas y genera revenue desde el d&iacute;a 1.</div>
+  </div>
+  <div class="item disagree">
+    <div class="item-title">2. Canal B2B / regalos corporativos</div>
+    <div class="item-body"><span class="tag tag-cmo">CMO</span> Lo pone en su <strong>Top 5</strong> como acci&oacute;n urgente: &ldquo;alto ticket, alto margen, sin descuento agresivo&rdquo;. <span class="tag tag-analyst">Analista</span> <strong>No lo menciona.</strong> Su foco es 100% el canal de email existente y sus features t&eacute;cnicos. <strong>Traducci&oacute;n:</strong> el Analista opera dentro del scope del canal; el CMO piensa en nuevas l&iacute;neas de revenue. El B2B es una oportunidad real en Argentina (alfajores para regalos empresariales de fin de a&ntilde;o) pero no es una mejora del programa de email, sino un negocio nuevo.</div>
+  </div>
+  <div class="item disagree">
+    <div class="item-title">3. Descuento monetario en carrito abandonado</div>
+    <div class="item-body"><span class="tag tag-cmo">CMO</span> No pide descuentos directos; su foco est&aacute; en suscripci&oacute;n y DOU coins como motor econ&oacute;mico. <span class="tag tag-analyst">Analista</span> Pide expl&iacute;citamente un <strong>3er email con % de descuento real</strong> (no solo coins ni env&iacute;o gratis condicionado), argumentando que recupera 15-25% adicional. <strong>Traducci&oacute;n:</strong> tensi&oacute;n cl&aacute;sica marca vs. performance. El descuento funciona t&aacute;cticamente pero puede erosionar la percepci&oacute;n de valor si se vuelve esperado.</div>
+  </div>
+</div>
+
+<div class="actions-section">
+  <h2>Top 5 acciones urgentes &mdash; cada subagente</h2>
+
+  <div class="action-group-header">
+    <span class="tag tag-cmo">CMO</span>
+    <h3>Visi&oacute;n estrat&eacute;gica</h3>
+  </div>
+
+  <div class="action-card">
+    <div class="action-rank">1</div>
+    <div class="action-title">Lanzar programa de suscripci&oacute;n/recompra autom&aacute;tica</div>
+    <div class="action-detail">El producto se consume cada 2-3 semanas. Convertir el Flujo 4 de &ldquo;reconquista manual&rdquo; a gesti&oacute;n de suscriptores activos. Revenue predecible + reducci&oacute;n de CAC efectivo.</div>
+  </div>
+  <div class="action-card">
+    <div class="action-rank">2</div>
+    <div class="action-title">Operacionalizar DOU Gang: conversi&oacute;n de coins, tiers, balance visible, flujo propio de referidos</div>
+    <div class="action-detail">Hoy es narrativa sin motor financiero. Definir $1 = X coins, crear niveles alcanzables, mostrar balance din&aacute;mico en cada email, y darle al referido su propio flujo en vez de ser una posdata.</div>
+  </div>
+  <div class="action-card">
+    <div class="action-rank">3</div>
+    <div class="action-title">Proteger noviembre con reglas de frecuencia y supresi&oacute;n cross-flow</div>
+    <div class="action-detail">5-6 campa&ntilde;as + flujos always-on = hasta 10 emails por contacto en 30 d&iacute;as. Sin frequency capping, el mes de mayor revenue potencial puede da&ntilde;ar la reputaci&oacute;n de env&iacute;o para todo 2027.</div>
+  </div>
+  <div class="action-card">
+    <div class="action-rank">4</div>
+    <div class="action-title">Segmentaci&oacute;n real + Browse Abandonment</div>
+    <div class="action-detail">Segmentar por engagement, historial de sabor, CLV. Agregar flujo de Browse Abandonment para capturar el tr&aacute;fico cualificado que nunca llega a checkout.</div>
+  </div>
+  <div class="action-card">
+    <div class="action-rank">5</div>
+    <div class="action-title">Canal B2B / regalos corporativos con journey separado</div>
+    <div class="action-detail">Separar el journey &ldquo;compro para m&iacute;&rdquo; del de &ldquo;compro para regalar/empresa&rdquo;. Corporativo es alto ticket sin descuento agresivo y est&aacute; completamente ausente.</div>
+  </div>
+
+  <div class="action-group-header">
+    <span class="tag tag-analyst">Analista</span>
+    <h3>Visi&oacute;n t&aacute;ctica</h3>
+  </div>
+
+  <div class="action-card">
+    <div class="action-rank">1</div>
+    <div class="action-title">Browse Abandonment + 3er email de carrito con descuento real</div>
+    <div class="action-detail">Activar flujo por <code>Viewed Product</code> (2 emails, 4h/24h). Agregar email 2.3 al carrito abandonado a las 48-72h con incentivo monetario concreto. Impacto inmediato y medible.</div>
+  </div>
+  <div class="action-card">
+    <div class="action-rank">2</div>
+    <div class="action-title">Segmento &ldquo;Engaged&rdquo; + Sunset/Winback antes de noviembre</div>
+    <div class="action-detail">Crear segmento Klaviyo &ldquo;Engaged 90 d&iacute;as&rdquo; y usarlo como audiencia base de toda campa&ntilde;a. Construir Winback (60-90-120 d&iacute;as) y Sunset (180+ d&iacute;as) antes de la temporada alta.</div>
+  </div>
+  <div class="action-card">
+    <div class="action-rank">3</div>
+    <div class="action-title">Segmentar campa&ntilde;as + activar frequency capping / Smart Sending</div>
+    <div class="action-detail">M&iacute;nimo 3 segmentos (Engaged, VIP, No compradores recientes). L&iacute;mite: no m&aacute;s de 1 email de campa&ntilde;a + 1 de flujo por d&iacute;a por perfil. Acceso anticipado real para VIPs en lanzamiento.</div>
+  </div>
+  <div class="action-card">
+    <div class="action-rank">4</div>
+    <div class="action-title">Cross-sell post-compra + Predicted Next Order Date</div>
+    <div class="action-detail">Sincronizar <code>Last Purchased Flavor</code> como custom property. Recomendar sabor complementario a los 30-45 d&iacute;as. Migrar timing del Flujo 4 a predicci&oacute;n individual de Klaviyo.</div>
+  </div>
+  <div class="action-card">
+    <div class="action-rank">5</div>
+    <div class="action-title">Framework de m&eacute;tricas y testing formal</div>
+    <div class="action-detail">RPR y Click Rate como m&eacute;tricas de decisi&oacute;n (nunca Open Rate por Apple MPP). Objetivo: 30-40% del revenue de ecommerce desde email. Log de tests A/B con hip&oacute;tesis y resultado.</div>
+  </div>
+</div>
+
+<h2>S&iacute;ntesis final</h2>
+<div class="verdict-box">
+  <p>Los dos analistas, sin saber del otro, llegaron al mismo diagn&oacute;stico: <strong>DOU Foods tiene una marca fuerte pero un programa de email inmaduro</strong>. Las 3 acciones que ambos ponen en su Top 5 son:</p>
+  <p style="margin-top: 12px;"><strong>1.</strong> Proteger noviembre con frequency capping y segmentaci&oacute;n por engagement.<br>
+  <strong>2.</strong> Agregar Browse Abandonment + Sunset/Winback.<br>
+  <strong>3.</strong> Construir un framework de m&eacute;tricas real (RPR, no Open Rate).</p>
+  <p style="margin-top: 12px;">La diferencia est&aacute; en el &aacute;ngulo: el CMO piensa en <strong>modelo de negocio</strong> (suscripci&oacute;n, B2B, tiers de loyalty); el Analista piensa en <strong>infraestructura t&eacute;cnica del canal</strong> (Klaviyo features, deliverability, testing). No se contradicen &mdash; se complementan. Necesit&aacute;s ambas capas para que el email pase de &ldquo;plan de contenidos&rdquo; a &ldquo;canal de revenue serio&rdquo;.</p>
+</div>
