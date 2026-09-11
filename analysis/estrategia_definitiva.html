@@ -438,6 +438,7 @@ tr:last-child td { border-bottom: none; }
     <a href="#reglas">Reglas y Leyenda</a>
     <a href="#supresion">Supresion Cross-Flow</a>
     <a href="#mapa">Mapa de Flows</a>
+    <a href="#migracion">Migracion Base Existente</a>
 
     <div class="nav-section">Fase 1 — Flows</div>
     <a href="#f1">1. Bienvenida</a>
@@ -560,7 +561,7 @@ tr:last-child td { border-bottom: none; }
       <table>
         <thead><tr><th>#</th><th>Flow</th><th>Estado</th><th>Emails</th><th>Trigger</th></tr></thead>
         <tbody>
-          <tr><td>1</td><td>Bienvenida</td><td><span class="badge badge-update">Actualizado</span> 2→4</td><td>4</td><td>Alta en lista</td></tr>
+          <tr><td>1</td><td>Bienvenida</td><td><span class="badge badge-update">Actualizado</span> 2→6</td><td>6 (2 ramas)</td><td>Alta en lista + Trigger Split por origen</td></tr>
           <tr><td>2</td><td>Carrito Abandonado</td><td><span class="badge badge-update">Actualizado</span> 2→3</td><td>3</td><td>Checkout Started sin compra</td></tr>
           <tr><td>3</td><td>Post-Compra</td><td><span class="badge badge-update">Actualizado</span></td><td>3 (con ramas)</td><td>Placed Order</td></tr>
           <tr><td>4</td><td>Recompra</td><td><span class="badge badge-same">Sin cambios</span></td><td>2</td><td>21/35 dias sin recompra</td></tr>
@@ -581,15 +582,34 @@ tr:last-child td { border-bottom: none; }
   <!-- FLOW 1 -->
   <div class="section" id="f1">
     <h2>Flujo 1 — Bienvenida <span class="badge badge-update">Actualizado</span></h2>
+
+    <div class="callout">
+      <strong>Cambio clave respecto a la version anterior:</strong> este flow ahora tiene un <strong>Trigger Split inmediato</strong> al inicio que bifurca segun como entro el contacto a la lista. Un suscriptor voluntario (popup, footer) recibe la secuencia completa de conversion (4 emails). Un comprador (entro por Placed Order o Checkout Started) recibe una bienvenida corta (2 emails) y salta directo a Post-Compra/Recompra. Esto evita el choque de mandarle "conoce la marca" a alguien que ya te compro.
+    </div>
+
     <div class="flow-header">
-      <div class="row"><span class="label">Trigger</span><span class="value">El contacto se suscribe a la lista "DOU Gang / Newsletter"</span></div>
-      <div class="row"><span class="label">Objetivo</span><span class="value">Generar la primera compra sin descuento, presentar los 3 sabores + MIX, sembrar identidad DOU Gang</span></div>
-      <div class="row"><span class="label">Cond. Split</span><span class="value">Si, en Email 1.3 (dia 4) — rama segun Placed Order</span></div>
-      <div class="row"><span class="label">Salida</span><span class="value">Si compra → sale y entra a Post-Compra (Flujo 3)</span></div>
+      <div class="row"><span class="label">Trigger</span><span class="value">El contacto se agrega a la lista "DOU Gang / Newsletter" por cualquier via</span></div>
+      <div class="row"><span class="label">Flow Filter</span><span class="value">Solo contactos nuevos: "Date added to list is after [fecha de activacion]". Excluir si ya recibio este flow antes</span></div>
+      <div class="row"><span class="label">Trigger Split</span><span class="value">INMEDIATO (antes de cualquier email): evalua "Placed Order at least once" OR "Started Checkout at least once"</span></div>
+      <div class="row"><span class="label">Salida</span><span class="value">Si compra durante el flow → sale y entra a Post-Compra (Flujo 3)</span></div>
+    </div>
+
+    <div class="callout" style="border-left-color:var(--badge-update);">
+      <strong>Como configurar el Trigger Split en Klaviyo:</strong> en el flow builder, inmediatamente despues del trigger "Added to List", agregar un <strong>Conditional Split</strong> con la condicion: "What someone has done → Placed Order → at least once → over all time". Los que cumplen van a Rama B (Comprador). Los que no cumplen van a Rama A (Suscriptor). Esto evalua el historial completo del contacto, no solo lo que paso despues de entrar al flow.
+    </div>
+
+    <!-- RAMA A: SUSCRIPTOR VOLUNTARIO -->
+    <h3>Rama A — Suscriptor Voluntario (4 emails)</h3>
+    <p>Para quien entro por popup, footer, opt-in en la pagina o cualquier via que <strong>no</strong> implique una compra previa. Nunca compro — el objetivo es convertirlo.</p>
+
+    <div class="flow-header" style="border-left:3px solid var(--badge-new);border-radius:0 6px 6px 0;">
+      <div class="row"><span class="label">Trigger real</span><span class="value">Added to List + Conditional Split = "Placed Order zero times over all time"</span></div>
+      <div class="row"><span class="label">Objetivo</span><span class="value">Generar la primera compra sin descuento. Presentar marca, sabores, MIX, DOU Gang</span></div>
+      <div class="row"><span class="label">Cond. Split</span><span class="value">En Email 1A.3 (dia 4) — evalua si compro durante la secuencia</span></div>
     </div>
 
     <details class="email-card">
-      <summary><span class="badge badge-update">Actualizado</span> Email 1.1 — Bienvenido/a a la Manada <span style="color:var(--text-muted);font-weight:400;font-size:12px;margin-left:auto;">Inmediato</span></summary>
+      <summary><span class="badge badge-update">Actualizado</span> Email 1A.1 — Bienvenido/a a la Manada <span style="color:var(--text-muted);font-weight:400;font-size:12px;margin-left:auto;">Inmediato</span></summary>
       <div class="email-body">
         <div class="email-field">Asunto</div>
         <div class="email-subject">Bienvenido/a a la Manada 🐺🍫</div>
@@ -613,7 +633,7 @@ tr:last-child td { border-bottom: none; }
     </details>
 
     <details class="email-card">
-      <summary><span class="badge badge-new">Nuevo</span> Email 1.2 — ¿Quien carajo hace estos alfajores? <span style="color:var(--text-muted);font-weight:400;font-size:12px;margin-left:auto;">Dia 2</span></summary>
+      <summary><span class="badge badge-new">Nuevo</span> Email 1A.2 — ¿Quien carajo hace estos alfajores? <span style="color:var(--text-muted);font-weight:400;font-size:12px;margin-left:auto;">Dia 2</span></summary>
       <div class="email-body">
         <div class="email-field">Asunto</div>
         <div class="email-subject">Che, ¿quien hace estos alfajores?</div>
@@ -628,16 +648,17 @@ tr:last-child td { border-bottom: none; }
           <p><span class="email-cta">Ver por que la gente se vuelve loca por DOU →</span> <span class="email-cta-secondary">Seguinos en Instagram →</span></p>
           <p>— DOU</p>
         </div>
-        <div class="email-notes">Email de marca, bajo CTA de venta directa (soft sell). Usar fotos del proceso/equipo o testimonios reales. Objetivo: generar confianza antes de la venta fuerte en 1.3.</div>
+        <div class="email-notes">Email de marca, soft sell. Usar fotos del proceso/equipo o testimonios reales. Genera confianza antes de la venta fuerte en 1A.3.</div>
       </div>
     </details>
 
-    <h4>Email 1.3 — Dia 4: Conditional Split segun compra</h4>
+    <h4>Email 1A.3 — Dia 4: Conditional Split segun compra durante el flow</h4>
+    <p style="font-size:13px;color:var(--text-muted);">Condicion en Klaviyo: "What someone has done → Placed Order → at least once → since starting this flow"</p>
 
     <div class="branch">
-      <div class="branch-label">Rama A — Si compro</div>
+      <div class="branch-label">Si compro durante el flow</div>
       <details class="email-card">
-        <summary><span class="badge badge-new">Nuevo</span> Email 1.3A — Bienvenido a DOU Gang de verdad</summary>
+        <summary><span class="badge badge-new">Nuevo</span> Email 1A.3-SI — Ya sos DOU Gang oficial</summary>
         <div class="email-body">
           <div class="email-field">Asunto</div>
           <div class="email-subject">Ya sos DOU Gang oficial 🎉</div>
@@ -654,15 +675,15 @@ tr:last-child td { border-bottom: none; }
             <p><span class="email-cta">Ver mi cuenta DOU Gang →</span></p>
             <p>Gracias por bancar la marca desde el dia 1.<br>— DOU</p>
           </div>
-          <div class="email-notes">No repetir info de confirmacion de pedido (eso ya lo cubre Flujo 3). Este email es 100% identidad/pertenencia.</div>
+          <div class="email-notes">No repetir info de confirmacion de pedido (eso lo cubre Flujo 3 que ya se disparo). 100% identidad/pertenencia. Sale del flow aca.</div>
         </div>
       </details>
     </div>
 
     <div class="branch">
-      <div class="branch-label">Rama B — No compro</div>
+      <div class="branch-label">No compro durante el flow</div>
       <details class="email-card">
-        <summary><span class="badge badge-update">Actualizado</span> Email 1.3B — Si no sabes por donde arrancar</summary>
+        <summary><span class="badge badge-update">Actualizado</span> Email 1A.3-NO — Si no sabes por donde arrancar</summary>
         <div class="email-body">
           <div class="email-field">Asunto</div>
           <div class="email-subject">¿Todavia no elegiste sabor? Facil.</div>
@@ -676,13 +697,13 @@ tr:last-child td { border-bottom: none; }
             <p><span class="email-cta">Quiero la caja MIX →</span> <span class="email-cta-secondary">Ver los 3 sabores por separado →</span></p>
             <p>— DOU</p>
           </div>
-          <div class="email-notes">Unico lugar del flow donde se menciona el umbral de envio gratis ($40.000) como palanca.</div>
+          <div class="email-notes">Unico lugar del flow donde se menciona el umbral de envio gratis ($40.000). Sigue a Email 1A.4.</div>
         </div>
       </details>
     </div>
 
     <details class="email-card">
-      <summary><span class="badge badge-new">Nuevo</span> Email 1.4 — Antes de despedirnos (por ahora) <span style="color:var(--text-muted);font-weight:400;font-size:12px;margin-left:auto;">Dia 7</span></summary>
+      <summary><span class="badge badge-new">Nuevo</span> Email 1A.4 — Antes de despedirnos (por ahora) <span style="color:var(--text-muted);font-weight:400;font-size:12px;margin-left:auto;">Dia 7</span></summary>
       <div class="email-body">
         <div class="email-field">Asunto</div>
         <div class="email-subject">Ultima del team bienvenida (lo prometemos)</div>
@@ -700,9 +721,81 @@ tr:last-child td { border-bottom: none; }
           <p><span class="email-cta">Ver todos los sabores →</span></p>
           <p>Nos vemos en tu bandeja de entrada (o en tu carrito, jeje).<br>— DOU</p>
         </div>
-        <div class="email-notes">Cierre del flow sin presion de venta agresiva. El contacto queda disponible para Browse Abandonment, Carrito y campanas de Fase 2.</div>
+        <div class="email-notes">Cierre del flow. El contacto queda disponible para Browse Abandonment, Carrito y campanas de Fase 2.</div>
       </div>
     </details>
+
+    <!-- RAMA B: COMPRADOR -->
+    <h3>Rama B — Comprador (2 emails)</h3>
+    <p>Para quien entro a la lista porque <strong>concreto una compra</strong> (Placed Order), <strong>abandono un carrito</strong> (Started Checkout) o cualquier interaccion comercial directa. Ya conoce el producto — no necesita nurture de "conoce la marca".</p>
+
+    <div class="flow-header" style="border-left:3px solid var(--accent);border-radius:0 6px 6px 0;">
+      <div class="row"><span class="label">Trigger real</span><span class="value">Added to List + Conditional Split = "Placed Order at least once over all time"</span></div>
+      <div class="row"><span class="label">Objetivo</span><span class="value">Dar la bienvenida a la comunidad, explicar DOU Gang/coins, derivar rapido a Post-Compra</span></div>
+      <div class="row"><span class="label">No tiene</span><span class="value">Pitch de producto, presentacion de sabores, empuje a MIX — eso ya lo resolvio la compra</span></div>
+      <div class="row"><span class="label">Supresion</span><span class="value">Smart Sending resuelve choque con Post-Compra (Flujo 3) que corre en paralelo por la misma compra. No enviar 1B.1 si Post-Compra 3.1 salio hace menos de 4 horas</span></div>
+    </div>
+
+    <details class="email-card">
+      <summary><span class="badge badge-new">Nuevo</span> Email 1B.1 — Bienvenido/a a la Gang (version comprador) <span style="color:var(--text-muted);font-weight:400;font-size:12px;margin-left:auto;">4 horas despues del alta (no inmediato)</span></summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Ya sos parte de la DOU Gang 🐺</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">Tus coins ya estan sumando. Aca te contamos como funciona.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>¡Hola!</p>
+          <p>Tu compra ya la recibimos y la estas trackeando por separado. Este mail es para otra cosa: darte la bienvenida a la DOU Gang.</p>
+          <p>¿Que es DOU Gang? Es nuestro programa de lealtad. Funciona asi:</p>
+          <p>- Cada compra te da <strong>DOU coins</strong> (tu ultima ya te sumo ~200).<br>
+          - Con 500 coins, envio gratis sin minimo.<br>
+          - Con 1.500 coins, una caja de 12 gratis.<br>
+          - Ademas sumas coins por cumpleanos, resenas e invitar amigos.</p>
+          <p>De aca en mas, te vamos a escribir solo cuando tengamos algo que valga la pena: novedades, tu saldo de coins, y algun que otro chiste malo. Nada de spam.</p>
+          <p><span class="email-cta">Ver mi cuenta DOU Gang →</span></p>
+          <p>Gracias por bancar la marca.<br>— El equipo DOU</p>
+        </div>
+        <div class="email-notes">
+          <strong>Timing:</strong> 4 horas de delay despues del alta para no chocar con el email transaccional de Post-Compra (3.1) que sale inmediato. Smart Sending refuerza que no se pisen.<br>
+          <strong>Clave:</strong> NO presentar los sabores ni empujar a comprar — ya compro. El foco es 100% comunidad y coins.
+        </div>
+      </div>
+    </details>
+
+    <details class="email-card">
+      <summary><span class="badge badge-new">Nuevo</span> Email 1B.2 — Asi funciona ser parte de la Manada <span style="color:var(--text-muted);font-weight:400;font-size:12px;margin-left:auto;">Dia 3</span></summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Que esperar de aca en mas (spoiler: cosas buenas)</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">Newsletter, acceso anticipado y tu saldo de coins. Eso vas a recibir.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Ultimo mail de bienvenida, prometido. Solo queríamos contarte que podes esperar de nosotros:</p>
+          <p><strong>Una vez por mes:</strong> el DOU Gang Report — tu saldo de coins, el sabor del mes, y lo que se viene. Sin vueltas.</p>
+          <p><strong>Cada tanto:</strong> acceso anticipado a lanzamientos o promos especiales (sin descuentos, aca los precios no se tocan — pero si hay coins extra y envio gratis en momentos puntuales).</p>
+          <p><strong>Siempre:</strong> si respondés un mail nuestro, te lee una persona real. No un bot. Posta.</p>
+          <p>Si algun dia queres dejar de recibir mails, el link esta siempre abajo. Sin rencores.</p>
+          <p><span class="email-cta">Ver la tienda →</span> <span class="email-cta-secondary">Seguinos en Instagram →</span></p>
+          <p>— DOU</p>
+        </div>
+        <div class="email-notes">Cierre de la bienvenida para compradores. 2 emails nada mas — no necesitan los 4 de la Rama A. De aca el contacto queda disponible para Post-Compra (si no termino todavia), Browse Abandonment, Recompra y campanas de Fase 2.</div>
+      </div>
+    </details>
+
+    <!-- RESUMEN DE TRIGGERS -->
+    <h3>Resumen: por que no se pisan</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Origen del contacto</th><th>Evento en Klaviyo</th><th>Rama</th><th>Emails</th><th>No se pisa con</th></tr></thead>
+        <tbody>
+          <tr><td>Popup, footer, opt-in de pagina</td><td>Added to List + Placed Order = 0</td><td>A (Suscriptor)</td><td>4 emails en 7 dias</td><td>Carrito Abandonado tiene prioridad si abandona checkout durante el flow</td></tr>
+          <tr><td>Compro en la tienda</td><td>Added to List + Placed Order >= 1</td><td>B (Comprador)</td><td>2 emails en 3 dias</td><td>Post-Compra (Flujo 3) corre en paralelo; Smart Sending + delay de 4hs evitan choque</td></tr>
+          <tr><td>Abandono carrito (dejo email sin comprar)</td><td>Added to List + Placed Order = 0</td><td>A (Suscriptor)</td><td>4 emails, pero Carrito Abandonado (Flujo 2) tiene prioridad</td><td>Exclusion dura: si esta en Carrito Abandonado, Bienvenida se pausa ese dia</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <hr class="divider">
@@ -1656,6 +1749,213 @@ tr:last-child td { border-bottom: none; }
         <div class="email-notes">Solo a quienes no respondieron ni agendaron. Si no hay respuesta despues del segundo email, el prospecto sale de la secuencia activa y pasa a re-contacto trimestral.</div>
       </div>
     </details>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ═══════════════ MIGRACION BASE EXISTENTE ═══════════════ -->
+  <div class="section" id="migracion">
+    <h2>Migracion de la Base Existente (~300 contactos) <span class="badge badge-new">Nuevo</span></h2>
+
+    <div style="background:var(--accent-light);border-left:4px solid var(--accent);padding:16px 20px;border-radius:0 8px 8px 0;margin-bottom:24px;">
+      <strong>Contexto:</strong> DOU ya tiene ~300 contactos en su base. Antes de activar los flows, hay que clasificarlos y asignarlos correctamente para que no reciban emails que no les corresponden (ejemplo: un cliente de hace 6 meses no deberia recibir "Bienvenida").
+    </div>
+
+    <h3 style="margin-top:32px;">Paso 1 — Clasificar la base actual</h3>
+    <p>Antes de activar cualquier flow, segmentar los 300 contactos en estas categorias usando los datos de Klaviyo + WooCommerce:</p>
+
+    <table style="width:100%;border-collapse:collapse;margin:16px 0 24px;">
+      <thead>
+        <tr style="background:var(--bg-surface);">
+          <th style="text-align:left;padding:10px 12px;border-bottom:2px solid var(--border);font-size:13px;">Segmento</th>
+          <th style="text-align:left;padding:10px 12px;border-bottom:2px solid var(--border);font-size:13px;">Criterio</th>
+          <th style="text-align:left;padding:10px 12px;border-bottom:2px solid var(--border);font-size:13px;">Estimado</th>
+          <th style="text-align:left;padding:10px 12px;border-bottom:2px solid var(--border);font-size:13px;">Destino</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--border-light);">
+          <td style="padding:10px 12px;font-weight:600;">Compradores recientes</td>
+          <td style="padding:10px 12px;">Ultima compra hace &lt;90 dias</td>
+          <td style="padding:10px 12px;">~80-120</td>
+          <td style="padding:10px 12px;">Entran solos a <strong>Recompra</strong> (el trigger de segmento los evalua)</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border-light);">
+          <td style="padding:10px 12px;font-weight:600;">Compradores frios</td>
+          <td style="padding:10px 12px;">Ultima compra hace 90-270 dias</td>
+          <td style="padding:10px 12px;">~50-80</td>
+          <td style="padding:10px 12px;">Entran solos a <strong>Winback</strong> (trigger de segmento)</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border-light);">
+          <td style="padding:10px 12px;font-weight:600;">Compradores muertos</td>
+          <td style="padding:10px 12px;">Ultima compra hace &gt;270 dias O nunca abren emails</td>
+          <td style="padding:10px 12px;">~30-50</td>
+          <td style="padding:10px 12px;">Entran solos a <strong>Sunset</strong> (trigger de segmento)</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border-light);">
+          <td style="padding:10px 12px;font-weight:600;">Suscriptores que nunca compraron</td>
+          <td style="padding:10px 12px;">En lista pero Placed Order = 0</td>
+          <td style="padding:10px 12px;">~50-70</td>
+          <td style="padding:10px 12px;">Campana unica de <strong>Relanzamiento</strong> (ver paso 3)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top:32px;">Paso 2 — Configurar Flow Filters antes de activar</h3>
+    <p>Esto es <strong>critico</strong>. Antes de poner cualquier flow en modo "Live":</p>
+
+    <div style="background:var(--badge-update-bg);border:1px solid var(--badge-update);border-radius:8px;padding:16px 20px;margin:16px 0;">
+      <strong style="color:var(--badge-update);">Configuracion exacta en Klaviyo:</strong><br><br>
+      <strong>Flow 1 (Bienvenida) → Flow Filter:</strong><br>
+      <code style="background:var(--code-bg);padding:2px 6px;border-radius:4px;">Properties about someone → Date Added → is after → [FECHA DE ACTIVACION]</code><br><br>
+      Esto garantiza que los 300 contactos existentes <strong>nunca</strong> entren al flow de Bienvenida. Solo los contactos nuevos (agregados despues de la fecha de activacion) lo disparan.<br><br>
+      <strong>Flows 4, 7, 8 (Recompra, Winback, Sunset):</strong><br>
+      Estos usan triggers basados en segmentos (<code style="background:var(--code-bg);padding:2px 6px;border-radius:4px;">Segment trigger</code>). Klaviyo evalua automaticamente a TODOS los contactos que cumplan la condicion, incluidos los existentes. No necesitan Flow Filter de fecha — se activan solos cuando el contacto entra al segmento.
+    </div>
+
+    <h3 style="margin-top:32px;">Paso 3 — Campana unica de Relanzamiento</h3>
+    <p>Para los suscriptores que nunca compraron (~50-70 contactos), enviar UNA campana manual (no un flow) antes de activar todo:</p>
+
+    <details class="email-card" open>
+      <summary><span class="badge badge-new">Nuevo</span> Campana: Relanzamiento para suscriptores sin compra</summary>
+      <div class="email-body">
+        <div class="email-field">Segmento</div>
+        <div class="email-copy" style="padding:8px 12px;font-size:13px;">En lista de correo + Placed Order = 0 veces over all time + fue agregado antes de [FECHA DE ACTIVACION]</div>
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Todavia no probaste DOU? Mira lo que te estas perdiendo</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">Un alfajor que rompe con lo que conocias. Y tenemos algo para vos.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Te suscribiste hace un tiempo pero todavia no probaste DOU.</p>
+          <p>Entendemos — hay mil opciones alla afuera. Pero DOU no es un alfajor mas: es un alfajor premium, sin conservantes, pensado para gente que quiere algo mejor.</p>
+          <p>Te dejamos 3 razones para animarte:</p>
+          <p>1. <strong>Tres sabores unicos</strong> que no encontras en ningun kiosco (NOM, XD, NT).<br>
+          2. <strong>DOU Coins:</strong> desde tu primera compra empezas a sumar coins para canjear por productos gratis.<br>
+          3. <strong>Envio rapido</strong> directo a tu puerta.</p>
+          <p>Si no es para vos, no pasa nada. Pero si queres probar, hoy es un buen dia.</p>
+          <p><span class="email-cta">Quiero probar DOU</span></p>
+        </div>
+        <div class="email-notes">
+          <strong>Importante:</strong> Esta campana se envia UNA sola vez, antes de activar los flows. Si no compran en 30 dias despues de esta campana, entran automaticamente a Sunset por trigger de segmento (baja engagement + sin compras). NO enviar como flow — es manual.
+        </div>
+      </div>
+    </details>
+
+    <h3 style="margin-top:32px;">Paso 4 — Orden de activacion de flows</h3>
+    <p>Activar los flows en este orden exacto para evitar colisiones:</p>
+
+    <table style="width:100%;border-collapse:collapse;margin:16px 0 24px;">
+      <thead>
+        <tr style="background:var(--bg-surface);">
+          <th style="text-align:center;padding:10px 12px;border-bottom:2px solid var(--border);font-size:13px;width:60px;">Orden</th>
+          <th style="text-align:left;padding:10px 12px;border-bottom:2px solid var(--border);font-size:13px;">Flow</th>
+          <th style="text-align:left;padding:10px 12px;border-bottom:2px solid var(--border);font-size:13px;">Por que en este orden</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--border-light);">
+          <td style="padding:10px 12px;text-align:center;font-weight:700;">1ro</td>
+          <td style="padding:10px 12px;font-weight:600;">Sunset (F8)</td>
+          <td style="padding:10px 12px;">Limpia los contactos muertos primero. Evita que reciban emails de otros flows.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border-light);">
+          <td style="padding:10px 12px;text-align:center;font-weight:700;">2do</td>
+          <td style="padding:10px 12px;font-weight:600;">Winback (F7)</td>
+          <td style="padding:10px 12px;">Captura a los frios antes de que caigan a Sunset.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border-light);">
+          <td style="padding:10px 12px;text-align:center;font-weight:700;">3ro</td>
+          <td style="padding:10px 12px;font-weight:600;">Recompra (F4)</td>
+          <td style="padding:10px 12px;">Los compradores recientes entran aca. Ya los muertos y frios estan siendo manejados.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border-light);">
+          <td style="padding:10px 12px;text-align:center;font-weight:700;">4to</td>
+          <td style="padding:10px 12px;font-weight:600;">Carrito (F2) + Browse (F6) + Post-Compra (F3)</td>
+          <td style="padding:10px 12px;">Estos son event-based (se activan por acciones futuras). No afectan a la base existente.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border-light);">
+          <td style="padding:10px 12px;text-align:center;font-weight:700;">5to</td>
+          <td style="padding:10px 12px;font-weight:600;">Bienvenida (F1)</td>
+          <td style="padding:10px 12px;">Se activa ultimo, con el Flow Filter de fecha ya puesto. Solo nuevos contactos lo disparan.</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 12px;text-align:center;font-weight:700;">6to</td>
+          <td style="padding:10px 12px;font-weight:600;">Cumpleanos (F5) + Referido (F9)</td>
+          <td style="padding:10px 12px;">Cumpleanos requiere tener el dato (pedir en futuras campanas). Referido necesita volumen.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top:32px;">Resumen visual: que pasa con cada tipo de contacto</h3>
+
+    <table style="width:100%;border-collapse:collapse;margin:16px 0 24px;">
+      <thead>
+        <tr style="background:var(--bg-surface);">
+          <th style="text-align:left;padding:10px 12px;border-bottom:2px solid var(--border);font-size:13px;">Tipo de contacto</th>
+          <th style="text-align:left;padding:10px 12px;border-bottom:2px solid var(--border);font-size:13px;">Bienvenida</th>
+          <th style="text-align:left;padding:10px 12px;border-bottom:2px solid var(--border);font-size:13px;">Recompra</th>
+          <th style="text-align:left;padding:10px 12px;border-bottom:2px solid var(--border);font-size:13px;">Winback</th>
+          <th style="text-align:left;padding:10px 12px;border-bottom:2px solid var(--border);font-size:13px;">Sunset</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--border-light);">
+          <td style="padding:10px 12px;font-weight:600;">Nuevo suscriptor (post-activacion)</td>
+          <td style="padding:10px 12px;color:var(--badge-new);font-weight:600;">Rama A</td>
+          <td style="padding:10px 12px;color:var(--text-muted);">—</td>
+          <td style="padding:10px 12px;color:var(--text-muted);">—</td>
+          <td style="padding:10px 12px;color:var(--text-muted);">—</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border-light);">
+          <td style="padding:10px 12px;font-weight:600;">Nuevo comprador (post-activacion)</td>
+          <td style="padding:10px 12px;color:var(--badge-new);font-weight:600;">Rama B</td>
+          <td style="padding:10px 12px;color:var(--text-muted);">—</td>
+          <td style="padding:10px 12px;color:var(--text-muted);">—</td>
+          <td style="padding:10px 12px;color:var(--text-muted);">—</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border-light);">
+          <td style="padding:10px 12px;font-weight:600;">Existente — compro hace &lt;90 dias</td>
+          <td style="padding:10px 12px;color:#C62828;font-weight:600;">Bloqueado</td>
+          <td style="padding:10px 12px;color:var(--badge-new);font-weight:600;">Auto</td>
+          <td style="padding:10px 12px;color:var(--text-muted);">—</td>
+          <td style="padding:10px 12px;color:var(--text-muted);">—</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border-light);">
+          <td style="padding:10px 12px;font-weight:600;">Existente — compro hace 90-270 dias</td>
+          <td style="padding:10px 12px;color:#C62828;font-weight:600;">Bloqueado</td>
+          <td style="padding:10px 12px;color:var(--text-muted);">—</td>
+          <td style="padding:10px 12px;color:var(--badge-new);font-weight:600;">Auto</td>
+          <td style="padding:10px 12px;color:var(--text-muted);">—</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border-light);">
+          <td style="padding:10px 12px;font-weight:600;">Existente — compro hace &gt;270 dias</td>
+          <td style="padding:10px 12px;color:#C62828;font-weight:600;">Bloqueado</td>
+          <td style="padding:10px 12px;color:var(--text-muted);">—</td>
+          <td style="padding:10px 12px;color:var(--text-muted);">—</td>
+          <td style="padding:10px 12px;color:var(--badge-new);font-weight:600;">Auto</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 12px;font-weight:600;">Existente — nunca compro</td>
+          <td style="padding:10px 12px;color:#C62828;font-weight:600;">Bloqueado</td>
+          <td style="padding:10px 12px;color:var(--text-muted);">—</td>
+          <td style="padding:10px 12px;color:var(--text-muted);">—</td>
+          <td style="padding:10px 12px;font-size:12px;">Campana Relanzamiento → si no compra en 30d → Sunset</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="background:var(--bg-surface);border-radius:8px;padding:16px 20px;margin-top:16px;">
+      <strong>Checklist pre-activacion:</strong>
+      <ul style="margin:8px 0 0;padding-left:20px;">
+        <li>Crear los 4 segmentos en Klaviyo (recientes, frios, muertos, nunca compraron)</li>
+        <li>Enviar la campana de Relanzamiento a suscriptores sin compra</li>
+        <li>Configurar Flow Filter de fecha en Bienvenida (F1)</li>
+        <li>Activar flows en el orden indicado (Sunset → Winback → Recompra → Event-based → Bienvenida)</li>
+        <li>Verificar que Smart Sending esta en 16h para todos los flows</li>
+        <li>Esperar 48h despues de la campana de Relanzamiento antes de activar Bienvenida</li>
+      </ul>
+    </div>
   </div>
 
   <hr class="divider">
