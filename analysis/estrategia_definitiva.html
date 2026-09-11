@@ -1,0 +1,1700 @@
+<title>DOU Foods Email Strategy</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&display=swap">
+<style>
+:root {
+  --bg: #FDFAF6;
+  --bg-surface: #F5EDE3;
+  --bg-email: #FFF9F3;
+  --text: #2C1810;
+  --text-secondary: #6B4C3B;
+  --text-muted: #9A8173;
+  --accent: #C4651A;
+  --accent-light: #F0E2D0;
+  --accent-hover: #A8550F;
+  --border: #E5D5C3;
+  --border-light: #EDE3D7;
+  --badge-new: #2E7D32;
+  --badge-new-bg: #E8F5E9;
+  --badge-update: #1565C0;
+  --badge-update-bg: #E3F2FD;
+  --badge-same: #78909C;
+  --badge-same-bg: #ECEFF1;
+  --nav-bg: #FAF5EF;
+  --nav-active: #C4651A;
+  --shadow: rgba(44, 24, 16, 0.06);
+  --code-bg: #F0E8E0;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1A1210;
+    --bg-surface: #261E1A;
+    --bg-email: #2E2420;
+    --text: #F0E8E0;
+    --text-secondary: #B8A090;
+    --text-muted: #887060;
+    --accent: #E07A2A;
+    --accent-light: #3D2E20;
+    --accent-hover: #F09040;
+    --border: #3D302A;
+    --border-light: #332822;
+    --badge-new: #66BB6A;
+    --badge-new-bg: #1B2E1C;
+    --badge-update: #64B5F6;
+    --badge-update-bg: #1A2636;
+    --badge-same: #90A4AE;
+    --badge-same-bg: #263238;
+    --nav-bg: #211A16;
+    --nav-active: #E07A2A;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --code-bg: #332822;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1A1210;
+  --bg-surface: #261E1A;
+  --bg-email: #2E2420;
+  --text: #F0E8E0;
+  --text-secondary: #B8A090;
+  --text-muted: #887060;
+  --accent: #E07A2A;
+  --accent-light: #3D2E20;
+  --accent-hover: #F09040;
+  --border: #3D302A;
+  --border-light: #332822;
+  --badge-new: #66BB6A;
+  --badge-new-bg: #1B2E1C;
+  --badge-update: #64B5F6;
+  --badge-update-bg: #1A2636;
+  --badge-same: #90A4AE;
+  --badge-same-bg: #263238;
+  --nav-bg: #211A16;
+  --nav-active: #E07A2A;
+  --shadow: rgba(0, 0, 0, 0.3);
+  --code-bg: #332822;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  font-size: 15px;
+  padding: 0 16px;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'DM Serif Display', Georgia, serif;
+  text-wrap: balance;
+  line-height: 1.2;
+}
+
+/* --- NAV --- */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100vh;
+  overflow-y: auto;
+  background: var(--nav-bg);
+  border-right: 1px solid var(--border);
+  padding: 24px 16px;
+  z-index: 100;
+  font-size: 13px;
+}
+.nav-brand {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 18px;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.nav-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.nav-section {
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin: 16px 0 6px;
+}
+.nav a {
+  display: block;
+  padding: 4px 8px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background 0.15s, color 0.15s;
+  line-height: 1.4;
+  margin-bottom: 1px;
+}
+.nav a:hover { background: var(--accent-light); color: var(--accent); }
+.nav a.active { background: var(--accent-light); color: var(--nav-active); font-weight: 600; }
+
+/* --- MAIN --- */
+.main {
+  margin-left: 260px;
+  max-width: 780px;
+  padding: 40px 24px 80px;
+}
+
+/* --- HEADER --- */
+.header {
+  margin-bottom: 48px;
+}
+.header h1 {
+  font-size: 32px;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.header h1 span { color: var(--accent); }
+.header-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 12px;
+}
+.header-meta strong { color: var(--text-secondary); }
+
+/* --- SECTIONS --- */
+.section {
+  margin-bottom: 48px;
+}
+.section > h2 {
+  font-size: 24px;
+  color: var(--text);
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--accent);
+  margin-bottom: 20px;
+}
+.section > h3 {
+  font-size: 18px;
+  color: var(--text);
+  margin: 28px 0 12px;
+}
+.section > h4 {
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin: 20px 0 8px;
+}
+.section p, .section li {
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  max-width: 65ch;
+}
+.section ul, .section ol {
+  padding-left: 20px;
+  margin-bottom: 12px;
+}
+
+/* --- BADGES --- */
+.badge {
+  display: inline-block;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 2px 8px;
+  border-radius: 3px;
+  vertical-align: middle;
+}
+.badge-new { background: var(--badge-new-bg); color: var(--badge-new); }
+.badge-update { background: var(--badge-update-bg); color: var(--badge-update); }
+.badge-same { background: var(--badge-same-bg); color: var(--badge-same); }
+
+/* --- TABLES --- */
+.table-wrap { overflow-x: auto; margin: 16px 0; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+th {
+  text-align: left;
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  padding: 8px 12px;
+  border-bottom: 2px solid var(--border);
+  white-space: nowrap;
+}
+td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  vertical-align: top;
+}
+tr:last-child td { border-bottom: none; }
+
+/* --- EMAIL CARDS --- */
+.email-card {
+  background: var(--bg-email);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+  margin: 16px 0;
+  overflow: hidden;
+}
+.email-card summary {
+  padding: 12px 16px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+}
+.email-card summary::-webkit-details-marker { display: none; }
+.email-card summary::before {
+  content: '▸';
+  font-size: 12px;
+  color: var(--text-muted);
+  transition: transform 0.15s;
+  flex-shrink: 0;
+}
+.email-card[open] summary::before { transform: rotate(90deg); }
+.email-card .email-body {
+  padding: 0 16px 16px;
+  border-top: 1px solid var(--border-light);
+  margin-top: 4px;
+}
+.email-field {
+  margin: 10px 0 4px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+.email-subject {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 16px;
+  color: var(--accent);
+}
+.email-preview {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+.email-copy {
+  background: var(--bg-surface);
+  border-radius: 4px;
+  padding: 16px;
+  margin: 10px 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+.email-copy p { margin-bottom: 10px; max-width: none; color: var(--text-secondary); }
+.email-copy p:last-child { margin-bottom: 0; }
+.email-cta {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff !important;
+  padding: 6px 16px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 4px 4px 4px 0;
+}
+.email-cta-secondary {
+  display: inline-block;
+  border: 1px solid var(--accent);
+  color: var(--accent) !important;
+  padding: 5px 15px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 4px 4px 4px 0;
+}
+.email-notes {
+  font-size: 12px;
+  color: var(--text-muted);
+  border-top: 1px dashed var(--border);
+  padding-top: 10px;
+  margin-top: 10px;
+}
+
+/* --- FLOW HEADER --- */
+.flow-header {
+  background: var(--bg-surface);
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin: 16px 0;
+  display: grid;
+  gap: 6px;
+  font-size: 13px;
+}
+.flow-header .row {
+  display: flex;
+  gap: 8px;
+}
+.flow-header .label {
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  min-width: 100px;
+  flex-shrink: 0;
+}
+.flow-header .value { color: var(--text-secondary); }
+
+/* --- BRANCH --- */
+.branch {
+  border-left: 2px solid var(--border);
+  padding-left: 16px;
+  margin: 12px 0 12px 8px;
+}
+.branch-label {
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+}
+
+/* --- CALLOUT --- */
+.callout {
+  background: var(--accent-light);
+  border-left: 3px solid var(--accent);
+  padding: 12px 16px;
+  border-radius: 0 4px 4px 0;
+  margin: 16px 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* --- DIVIDER --- */
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 40px 0;
+}
+
+/* --- MOBILE --- */
+@media (max-width: 800px) {
+  .nav {
+    position: static;
+    width: 100%;
+    height: auto;
+    max-height: none;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 16px;
+  }
+  .nav-links { display: none; }
+  .nav.open .nav-links { display: block; }
+  .nav-toggle {
+    display: block;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    margin-top: 8px;
+    font-family: inherit;
+  }
+  .main {
+    margin-left: 0;
+    padding: 24px 0 60px;
+  }
+}
+@media (min-width: 801px) {
+  .nav-toggle { display: none; }
+}
+
+/* scrollbar */
+.nav::-webkit-scrollbar { width: 4px; }
+.nav::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+</style>
+
+<nav class="nav" id="nav">
+  <div class="nav-brand">DOU Foods</div>
+  <div class="nav-sub">Estrategia de Email Marketing</div>
+  <button class="nav-toggle" onclick="document.getElementById('nav').classList.toggle('open')">Menu</button>
+  <div class="nav-links">
+    <div class="nav-section">General</div>
+    <a href="#reglas">Reglas y Leyenda</a>
+    <a href="#supresion">Supresion Cross-Flow</a>
+    <a href="#mapa">Mapa de Flows</a>
+
+    <div class="nav-section">Fase 1 — Flows</div>
+    <a href="#f1">1. Bienvenida</a>
+    <a href="#f2">2. Carrito Abandonado</a>
+    <a href="#f3">3. Post-Compra</a>
+    <a href="#f4">4. Recompra</a>
+    <a href="#f5">5. Cumpleanos</a>
+    <a href="#f6">6. Browse Abandonment</a>
+    <a href="#f7">7. Winback</a>
+    <a href="#f8">8. Sunset</a>
+    <a href="#f9">9. Referido</a>
+
+    <div class="nav-section">Operaciones</div>
+    <a href="#segmentacion">Segmentacion</a>
+    <a href="#frequency">Frequency Capping</a>
+    <a href="#deliverability">Deliverability</a>
+    <a href="#dougang">DOU Gang Coins</a>
+    <a href="#metricas">Metricas y KPIs</a>
+    <a href="#abtesting">A/B Testing</a>
+
+    <div class="nav-section">Fase 2 — Campanas</div>
+    <a href="#newsletter">Newsletter</a>
+    <a href="#estudiante">Dia del Estudiante</a>
+    <a href="#madre">Dia de la Madre</a>
+    <a href="#noviembre">Noviembre Protegido</a>
+    <a href="#blackfriday">Black Friday (SKIP)</a>
+    <a href="#navidad">Navidad</a>
+    <a href="#cierre">Cierre de Temporada</a>
+    <a href="#b2b">B2B / Distribuidores</a>
+  </div>
+</nav>
+
+<main class="main">
+  <!-- HEADER -->
+  <div class="header" id="top">
+    <h1>DOU <span>Foods</span></h1>
+    <h2 style="font-size:18px; color:var(--text-secondary); font-weight:400; margin-bottom:0;">Estrategia Definitiva de Email Marketing</h2>
+    <div class="header-meta">
+      <span><strong>Plataforma:</strong> Klaviyo + WooCommerce</span>
+      <span><strong>Lista:</strong> ~300 personas</span>
+      <span><strong>Tono:</strong> Rioplatense, "vos", informal</span>
+      <span><strong>Fecha:</strong> Septiembre 2026</span>
+    </div>
+  </div>
+
+  <!-- DECISIONES BASE -->
+  <div class="callout" style="margin-bottom:40px;">
+    <strong>Decisiones de base (no negociables):</strong> Sin cross-selling entre sabores. Sin descuentos de precio ($19.990 intocable). Sin modelo de suscripcion. Si campana B2B. Noviembre protegido. RPR como KPI primario. DOU Gang operacionalizado con coins, tiers y vencimiento.
+  </div>
+
+  <!-- ===== REGLAS GENERALES ===== -->
+  <div class="section" id="reglas">
+    <h2>Leyenda y Reglas Generales</h2>
+
+    <h3>Leyenda de estados</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Marca</th><th>Significado</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge badge-new">Nuevo</span></td><td>Flow o email que no existia en la estrategia original</td></tr>
+          <tr><td><span class="badge badge-update">Actualizado</span></td><td>Flow o email que existia pero cambia (copy, cantidad, logica)</td></tr>
+          <tr><td><span class="badge badge-same">Sin cambios</span></td><td>Se mantiene igual que en la estrategia original</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Decisiones de la auditoria aplicadas</h3>
+    <ol>
+      <li>Cero cross-selling automatizado entre sabores (NOM, XD, NT no se empujan entre si).</li>
+      <li>Cero descuentos de precio en ningun email. El incentivo es DOU coins, envio gratis o contenido/comunidad.</li>
+      <li>Sin modelo de suscripcion.</li>
+      <li>Se agrega Browse Abandonment (Flujo 6).</li>
+      <li>Recompra (Flujo 4) empalma con Winback (Flujo 7).</li>
+      <li>Se agrega Sunset (Flujo 8).</li>
+      <li>Post-Compra incorpora interceptacion de resena antes de pedir resena publica.</li>
+      <li>Referido pasa a ser flow propio (Flujo 9).</li>
+      <li>Bienvenida pasa de 2 a 4 emails.</li>
+      <li>Carrito Abandonado pasa de 2 a 3 emails, el 3ro sin descuento.</li>
+      <li>Conditional Splits donde aportan valor real.</li>
+      <li>A/B testing no se corre en flows (muestra insuficiente con 300 contactos).</li>
+    </ol>
+  </div>
+
+  <!-- SUPRESION -->
+  <div class="section" id="supresion">
+    <h2>Supresion Cross-Flow</h2>
+    <p>Con 300 personas, mandar mails superpuestos de varios flows quema la lista. Reglas a configurar en Klaviyo:</p>
+    <ul>
+      <li><strong>Smart Sending global:</strong> ningun contacto recibe mas de 1 email de flow por dia, salvo el transaccional de confirmacion de compra (3.1).</li>
+      <li><strong>Exclusion dura:</strong> si entra a Carrito Abandonado, se excluye de Browse Abandonment mientras el primero este activo.</li>
+      <li><strong>Exclusion dura:</strong> si hay <code>Placed Order</code> mientras esta en Bienvenida, Carrito, Browse, Recompra o Winback, sale del flow y entra a Post-Compra.</li>
+      <li><strong>Exclusion dura:</strong> Recompra y Winback nunca corren en simultaneo. Winback empieza recien cuando Recompra termino sin conversion (dia 35 sin compra → dia 60 entra Winback).</li>
+      <li><strong>Exclusion dura:</strong> Sunset solo dispara si el contacto no esta en ningun otro flow y no tuvo compra ni engagement en 180 dias.</li>
+      <li><strong>Excepcion:</strong> Cumpleanos puede convivir con otro flow activo (puntual, 1 vez al ano).</li>
+    </ul>
+
+    <h3>Prioridad entre flows (mayor a menor)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>#</th><th>Flow</th><th>Prioridad</th></tr></thead>
+        <tbody>
+          <tr><td>3</td><td>Post-Compra</td><td>Maxima</td></tr>
+          <tr><td>2</td><td>Carrito Abandonado</td><td>Alta</td></tr>
+          <tr><td>6</td><td>Browse Abandonment</td><td>Alta</td></tr>
+          <tr><td>1</td><td>Bienvenida</td><td>Media</td></tr>
+          <tr><td>4</td><td>Recompra</td><td>Media</td></tr>
+          <tr><td>7</td><td>Winback</td><td>Media-baja</td></tr>
+          <tr><td>9</td><td>Referido</td><td>Baja</td></tr>
+          <tr><td>5</td><td>Cumpleanos (paralelo)</td><td>Independiente</td></tr>
+          <tr><td>8</td><td>Sunset</td><td>Minima</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- MAPA -->
+  <div class="section" id="mapa">
+    <h2>Mapa de los 9 Flows</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>#</th><th>Flow</th><th>Estado</th><th>Emails</th><th>Trigger</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Bienvenida</td><td><span class="badge badge-update">Actualizado</span> 2→4</td><td>4</td><td>Alta en lista</td></tr>
+          <tr><td>2</td><td>Carrito Abandonado</td><td><span class="badge badge-update">Actualizado</span> 2→3</td><td>3</td><td>Checkout Started sin compra</td></tr>
+          <tr><td>3</td><td>Post-Compra</td><td><span class="badge badge-update">Actualizado</span></td><td>3 (con ramas)</td><td>Placed Order</td></tr>
+          <tr><td>4</td><td>Recompra</td><td><span class="badge badge-same">Sin cambios</span></td><td>2</td><td>21/35 dias sin recompra</td></tr>
+          <tr><td>5</td><td>Cumpleanos</td><td><span class="badge badge-same">Sin cambios</span></td><td>1</td><td>Fecha de cumpleanos</td></tr>
+          <tr><td>6</td><td>Browse Abandonment</td><td><span class="badge badge-new">Nuevo</span></td><td>2</td><td>Vio producto, no agrego al carrito</td></tr>
+          <tr><td>7</td><td>Winback</td><td><span class="badge badge-new">Nuevo</span></td><td>3</td><td>60/90/120 dias sin compra</td></tr>
+          <tr><td>8</td><td>Sunset</td><td><span class="badge badge-new">Nuevo</span></td><td>1</td><td>180+ dias sin compra ni engagement</td></tr>
+          <tr><td>9</td><td>Referido</td><td><span class="badge badge-new">Nuevo</span></td><td>2</td><td>Cliente satisfecho / DOU Gang activo</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ===== FASE 1: FLOWS ===== -->
+
+  <!-- FLOW 1 -->
+  <div class="section" id="f1">
+    <h2>Flujo 1 — Bienvenida <span class="badge badge-update">Actualizado</span></h2>
+    <div class="flow-header">
+      <div class="row"><span class="label">Trigger</span><span class="value">El contacto se suscribe a la lista "DOU Gang / Newsletter"</span></div>
+      <div class="row"><span class="label">Objetivo</span><span class="value">Generar la primera compra sin descuento, presentar los 3 sabores + MIX, sembrar identidad DOU Gang</span></div>
+      <div class="row"><span class="label">Cond. Split</span><span class="value">Si, en Email 1.3 (dia 4) — rama segun Placed Order</span></div>
+      <div class="row"><span class="label">Salida</span><span class="value">Si compra → sale y entra a Post-Compra (Flujo 3)</span></div>
+    </div>
+
+    <details class="email-card">
+      <summary><span class="badge badge-update">Actualizado</span> Email 1.1 — Bienvenido/a a la Manada <span style="color:var(--text-muted);font-weight:400;font-size:12px;margin-left:auto;">Inmediato</span></summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Bienvenido/a a la Manada 🐺🍫</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">3 sabores, cero vueltas. Elegi el tuyo.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>¡Hola!</p>
+          <p>Ya sos parte de la DOU Gang. A partir de ahora vas a recibir de nuestra parte: novedades, algun que otro chiste malo, y el mejor alfajor que vas a probar en tu vida (si, nos bancamos decirlo asi de fuerte).</p>
+          <p>Somos DOU. Hacemos alfajores en caja de 12, para compartir o para no compartir (no juzgamos). Tenemos 3 sabores y una promesa: nada de rellenos tacanos.</p>
+          <p><strong>NOM</strong> — chocolate + dulce de leche. El clasico que nunca falla.<br>
+          <strong>XD</strong> — chocolate blanco. El que se roba la caja cuando nadie mira.<br>
+          <strong>NT</strong> — avellana. El que sorprende a los que dicen "no me gusta la avellana" (spoiler: les gusta).</p>
+          <p>¿No podes decidir? Para eso existe la <strong>caja MIX</strong>: los 3 sabores en una sola caja, para que pruebes y despues nos cuentes cual te gano el corazon.</p>
+          <p><span class="email-cta">Quiero mi caja →</span> <span class="email-cta-secondary">Ver los 3 sabores →</span></p>
+          <p>Ah, una cosa mas: sumate a <strong>DOU Gang</strong>, nuestro programa de lealtad. Cada compra te da DOU coins que despues canjeas. Sin letra chica.</p>
+          <p>Bienvenido/a. En serio.<br>— El equipo DOU</p>
+        </div>
+        <div class="email-notes">Boton principal directo a coleccion de productos (no a un sabor puntual). Incluir foto/GIF de la caja abierta. No mencionar descuento.</div>
+      </div>
+    </details>
+
+    <details class="email-card">
+      <summary><span class="badge badge-new">Nuevo</span> Email 1.2 — ¿Quien carajo hace estos alfajores? <span style="color:var(--text-muted);font-weight:400;font-size:12px;margin-left:auto;">Dia 2</span></summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Che, ¿quien hace estos alfajores?</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">Contenido, no venta. Posta.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Antes de que sigas de largo pensando que somos una fabrica mas: no lo somos.</p>
+          <p>DOU nacio porque estabamos cansados de alfajores industriales con relleno de mentira. Asi que empezamos a hacer los que nosotros mismos queriamos comer: masa que no se desarma, relleno generoso, sabor real.</p>
+          <p>Cada caja de 12 la armamos pensando en que se comparta (o no, ya dijimos que no juzgamos).</p>
+          <p>Esto es DOU Gang: no es solo una lista de mails, es la gente que ya probo y no puede parar. Los vas a ver citados en nuestras redes, contando cual es su sabor favorito y peleando entre NOM, XD y NT como si fuera un clasico de futbol.</p>
+          <p><span class="email-cta">Ver por que la gente se vuelve loca por DOU →</span> <span class="email-cta-secondary">Seguinos en Instagram →</span></p>
+          <p>— DOU</p>
+        </div>
+        <div class="email-notes">Email de marca, bajo CTA de venta directa (soft sell). Usar fotos del proceso/equipo o testimonios reales. Objetivo: generar confianza antes de la venta fuerte en 1.3.</div>
+      </div>
+    </details>
+
+    <h4>Email 1.3 — Dia 4: Conditional Split segun compra</h4>
+
+    <div class="branch">
+      <div class="branch-label">Rama A — Si compro</div>
+      <details class="email-card">
+        <summary><span class="badge badge-new">Nuevo</span> Email 1.3A — Bienvenido a DOU Gang de verdad</summary>
+        <div class="email-body">
+          <div class="email-field">Asunto</div>
+          <div class="email-subject">Ya sos DOU Gang oficial 🎉</div>
+          <div class="email-field">Preview</div>
+          <div class="email-preview">Tus coins ya estan sumando.</div>
+          <div class="email-field">Cuerpo</div>
+          <div class="email-copy">
+            <p>Confirmado: ya hiciste tu primera compra y eso te mete de lleno en DOU Gang.</p>
+            <p>Recordatorio rapido de como funciona:<br>
+            - Sumas DOU coins por cada compra.<br>
+            - Canjeas esos coins por beneficios exclusivos.<br>
+            - Cuantas mas compras, mas status dentro de la Gang.</p>
+            <p>Vas a recibir el detalle de tu pedido por separado, este mail es solo para darte la bienvenida oficial al club.</p>
+            <p><span class="email-cta">Ver mi cuenta DOU Gang →</span></p>
+            <p>Gracias por bancar la marca desde el dia 1.<br>— DOU</p>
+          </div>
+          <div class="email-notes">No repetir info de confirmacion de pedido (eso ya lo cubre Flujo 3). Este email es 100% identidad/pertenencia.</div>
+        </div>
+      </details>
+    </div>
+
+    <div class="branch">
+      <div class="branch-label">Rama B — No compro</div>
+      <details class="email-card">
+        <summary><span class="badge badge-update">Actualizado</span> Email 1.3B — Si no sabes por donde arrancar</summary>
+        <div class="email-body">
+          <div class="email-field">Asunto</div>
+          <div class="email-subject">¿Todavia no elegiste sabor? Facil.</div>
+          <div class="email-field">Preview</div>
+          <div class="email-preview">La caja MIX existe justo para vos.</div>
+          <div class="email-field">Cuerpo</div>
+          <div class="email-copy">
+            <p>Te entendemos: elegir entre NOM, XD y NT es una decision dificil (a nosotros tambien nos cuesta, y eso que los inventamos).</p>
+            <p>Por eso existe la <strong>caja MIX</strong>: los 3 sabores en una sola caja de 12. Asi probas todo y en la proxima compra ya vas directo a tu favorito.</p>
+            <p>Dato random: llevando 2 cajas (cualquier combinacion) el envio te sale gratis. Matematica simple: mas alfajor, menos gasto en flete.</p>
+            <p><span class="email-cta">Quiero la caja MIX →</span> <span class="email-cta-secondary">Ver los 3 sabores por separado →</span></p>
+            <p>— DOU</p>
+          </div>
+          <div class="email-notes">Unico lugar del flow donde se menciona el umbral de envio gratis ($40.000) como palanca.</div>
+        </div>
+      </details>
+    </div>
+
+    <details class="email-card">
+      <summary><span class="badge badge-new">Nuevo</span> Email 1.4 — Antes de despedirnos (por ahora) <span style="color:var(--text-muted);font-weight:400;font-size:12px;margin-left:auto;">Dia 7</span></summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Ultima del team bienvenida (lo prometemos)</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">Todo lo que capaz no sabias de DOU.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Este es el ultimo mail de la serie de bienvenida. De aca en mas, solo te vamos a escribir cuando tengamos algo bueno para contar (o cuando tu carrito nos extrane, seamos honestos).</p>
+          <p>Antes de irnos, las preguntas que mas nos hacen:</p>
+          <p><strong>¿Cuanto tarda en llegar?</strong> Depende de tu zona, pero lo vas a ver en el checkout antes de pagar.<br>
+          <strong>¿El envio es gratis?</strong> Si, a partir de $40.000 en tu compra.<br>
+          <strong>¿Puedo combinar sabores en una caja?</strong> Con la caja MIX, si. Con las individuales, cada caja es de un solo sabor.<br>
+          <strong>¿Que son los DOU coins?</strong> Puntos que sumas en cada compra dentro de DOU Gang, canjeables por beneficios exclusivos.</p>
+          <p>Si te quedo alguna duda, responde este mismo mail. Lo lee una persona, no un bot.</p>
+          <p><span class="email-cta">Ver todos los sabores →</span></p>
+          <p>Nos vemos en tu bandeja de entrada (o en tu carrito, jeje).<br>— DOU</p>
+        </div>
+        <div class="email-notes">Cierre del flow sin presion de venta agresiva. El contacto queda disponible para Browse Abandonment, Carrito y campanas de Fase 2.</div>
+      </div>
+    </details>
+  </div>
+
+  <hr class="divider">
+
+  <!-- FLOW 2 -->
+  <div class="section" id="f2">
+    <h2>Flujo 2 — Carrito Abandonado <span class="badge badge-update">Actualizado</span></h2>
+    <div class="flow-header">
+      <div class="row"><span class="label">Trigger</span><span class="value">Checkout Started sin Placed Order</span></div>
+      <div class="row"><span class="label">Objetivo</span><span class="value">Recuperar la venta sin tocar precio. Intensidad creciente: recordatorio → urgencia → coins/envio</span></div>
+      <div class="row"><span class="label">Cond. Split</span><span class="value">Opcional en Email 2.3 — si el carrito supera $40.000, ocultar mensaje de envio gratis</span></div>
+      <div class="row"><span class="label">Salida</span><span class="value">Placed Order → Post-Compra. Suprime Browse Abandonment mientras este activo</span></div>
+    </div>
+
+    <details class="email-card">
+      <summary><span class="badge badge-same">Sin cambios</span> Email 2.1 — Tu pedido quedo a mitad de camino <span style="color:var(--text-muted);font-weight:400;font-size:12px;margin-left:auto;">1 hora</span></summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Che, se te quedo esto en el carrito</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">Todavia esta reservado (por ahora).</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Vimos que estabas a un paso de hacerte con tu caja de alfajores y, de repente, nada.</p>
+          <p>¿Se corto el wifi? ¿Te llamo tu vieja? Pasa. Tu carrito sigue ahi, tal cual lo dejaste:</p>
+          <p><em>[Bloque dinamico de carrito: imagen del producto, sabor, cantidad, precio]</em></p>
+          <p><span class="email-cta">Terminar mi compra →</span></p>
+          <p>— DOU</p>
+        </div>
+        <div class="email-notes">Bloque de producto dinamico (Klaviyo dynamic cart block). Sin mencion de coins ni envio — este email es el recordatorio simple.</div>
+      </div>
+    </details>
+
+    <details class="email-card">
+      <summary><span class="badge badge-same">Sin cambios</span> Email 2.2 — Ultima oportunidad <span style="color:var(--text-muted);font-weight:400;font-size:12px;margin-left:auto;">24 horas</span></summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Tus alfajores te estan esperando (no por mucho mas)</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">Ya sumaste DOU coins con solo llegar hasta aca.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Todavia tenes tu caja reservada, pero no la vamos a guardar para siempre.</p>
+          <p><em>[Bloque dinamico de carrito]</em></p>
+          <p>Un recordatorio: cada compra suma DOU coins a tu cuenta en DOU Gang. Cuanto antes cierres esto, antes empiezan a sumar.</p>
+          <p><span class="email-cta">Recuperar mi carrito →</span></p>
+          <p>— DOU</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="email-card">
+      <summary><span class="badge badge-new">Nuevo</span> Email 2.3 — El empujon final: coins + envio gratis <span style="color:var(--text-muted);font-weight:400;font-size:12px;margin-left:auto;">48-72 horas</span></summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Ok, esta es la posta final</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">Sin vueltas: aca tenes todo para decidirte.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Esta es la ultima vez que te escribimos por este carrito. Despues, lo dejamos descansar.</p>
+          <p>No te vamos a bajar el precio (nunca lo hacemos, asi seguimos poniendo relleno de verdad y no relleno de carton). Pero si te recordamos lo que ya tenes a mano:</p>
+          <p>- <strong>DOU coins:</strong> cerrando esta compra, empezas a sumar para tu cuenta en DOU Gang.<br>
+          - <strong>Envio gratis:</strong> si tu carrito llega a $40.000, el envio corre por nuestra cuenta. A veces con sumar una caja mas ya lo logras.</p>
+          <p><em>[Bloque dinamico de carrito]</em></p>
+          <p><span class="email-cta">Cerrar mi compra ahora →</span></p>
+          <p>Si decidiste que no era el momento, todo bien. Seguimos siendo amigos igual.<br>— DOU</p>
+        </div>
+        <div class="email-notes">Conditional split por valor del carrito: si supera $40.000, mostrar solo coins (ya tiene envio gratis). El incentivo es 100% no monetario.</div>
+      </div>
+    </details>
+  </div>
+
+  <hr class="divider">
+
+  <!-- FLOW 3 -->
+  <div class="section" id="f3">
+    <h2>Flujo 3 — Post-Compra <span class="badge badge-update">Actualizado</span></h2>
+    <div class="flow-header">
+      <div class="row"><span class="label">Trigger</span><span class="value">Placed Order</span></div>
+      <div class="row"><span class="label">Objetivo</span><span class="value">Confirmar pedido, reforzar DOU Gang, filtrar sentimiento antes de pedir resena publica</span></div>
+      <div class="row"><span class="label">Cond. Split</span><span class="value">En Email 3.2 — encuesta de 1 clic que deriva a resena publica o contencion privada</span></div>
+      <div class="row"><span class="label">Prioridad</span><span class="value">Maxima sobre cualquier otro flow</span></div>
+    </div>
+
+    <details class="email-card">
+      <summary><span class="badge badge-same">Sin cambios</span> Email 3.1 — Pedido confirmado <span style="color:var(--text-muted);font-weight:400;font-size:12px;margin-left:auto;">Inmediato</span></summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Confirmado: tu caja ya esta en camino 📦</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">Ademas, ya empezaste a sumar DOU coins.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>¡Gracias por tu compra!</p>
+          <p>Tu pedido <strong>[N° de orden]</strong> ya esta confirmado y en preparacion. En breve te llega el mail con el tracking.</p>
+          <p><em>[Bloque dinamico: sabor(es), cantidad, total]</em></p>
+          <p>Y ya que estamos: esta compra te sumo DOU coins a tu cuenta en DOU Gang. Podes revisar tu saldo cuando quieras.</p>
+          <p><span class="email-cta">Ver mi cuenta DOU Gang →</span></p>
+          <p>Gracias por bancar la marca.<br>— DOU</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="email-card">
+      <summary><span class="badge badge-update">Actualizado</span> Email 3.2 — ¿Como te fue con tu caja? (interceptacion) <span style="color:var(--text-muted);font-weight:400;font-size:12px;margin-left:auto;">Dia 7</span></summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Posta, ¿como te fue con tu caja?</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">Un clic y ya. Nos importa la respuesta real.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Ya paso una semana desde que te llego tu caja de DOU. Queremos saber la verdad, no la respuesta linda.</p>
+          <p><strong>¿Como estuvo tu experiencia?</strong></p>
+          <p><span class="email-cta">😍 Me encanto</span> <span class="email-cta-secondary">😐 Estuvo bien</span> <span class="email-cta-secondary">😞 No fue lo que esperaba</span></p>
+          <p>(Cada boton es un link distinto, un clic y listo)</p>
+          <p>— DOU</p>
+        </div>
+        <div class="email-notes">Cada boton apunta a una URL distinta con parametro identificable. Conditional Split despues: clic positivo → Rama A, clic neutro/negativo → Rama B, sin clic en 4 dias → Rama C.</div>
+      </div>
+    </details>
+
+    <div class="branch">
+      <div class="branch-label">Rama A — Respuesta positiva (😍)</div>
+      <details class="email-card">
+        <summary><span class="badge badge-update">Actualizado</span> Email 3.3A — Dejanos tu resena publica</summary>
+        <div class="email-body">
+          <div class="email-field">Asunto</div>
+          <div class="email-subject">¡Nos alegra un monton! ¿Nos ayudas con 2 minutos?</div>
+          <div class="email-field">Cuerpo</div>
+          <div class="email-copy">
+            <p>Leer que te encanto nos alegra el dia entero (posta, lo leemos entre todo el equipo).</p>
+            <p>¿Nos regalas 2 minutos para dejar tu opinion en publico? Nos ayuda un monton a que mas gente se anime a probar DOU.</p>
+            <p><span class="email-cta">Dejar mi resena en Google →</span> <span class="email-cta-secondary">Dejar mi resena en el sitio →</span></p>
+            <p>Gracias de nuevo por ser parte de la Gang.<br>— DOU</p>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div class="branch">
+      <div class="branch-label">Rama B — Respuesta neutra o negativa (😐 / 😞)</div>
+      <details class="email-card">
+        <summary><span class="badge badge-new">Nuevo</span> Email 3.3B — Contencion privada</summary>
+        <div class="email-body">
+          <div class="email-field">Asunto</div>
+          <div class="email-subject">Che, contanos que paso</div>
+          <div class="email-field">Cuerpo</div>
+          <div class="email-copy">
+            <p>Vimos que tu experiencia no fue la mejor y antes que nada: perdon. No es lo que buscamos con ninguna caja que sale de aca.</p>
+            <p>Contanos que paso (¿algo llego roto? ¿el sabor no te cerro? ¿un tema de envio?). Respondiendo este mismo mail llega directo a una persona del equipo, no a un buzon generico.</p>
+            <p><span class="email-cta">Contame que paso →</span></p>
+            <p>Vamos a hacer lo posible para que tu proxima experiencia con DOU sea la que te mereces.<br>— DOU</p>
+          </div>
+          <div class="email-notes">NO deriva a resena publica ni ofrece descuento. La compensacion (si la hay) se resuelve manualmente con coins o reposicion.</div>
+        </div>
+      </details>
+    </div>
+
+    <div class="branch">
+      <div class="branch-label">Rama C — No respondio (fallback, dia 11)</div>
+      <details class="email-card">
+        <summary><span class="badge badge-new">Nuevo</span> Email 3.3C — Sin drama</summary>
+        <div class="email-body">
+          <div class="email-field">Asunto</div>
+          <div class="email-subject">Sin drama si no tuviste tiempo</div>
+          <div class="email-field">Cuerpo</div>
+          <div class="email-copy">
+            <p>No pasa nada si no llegaste a contestar la encuesta. Si en algun momento queres dejarnos tu opinion, la puerta sigue abierta.</p>
+            <p><span class="email-cta">Dejar mi opinion →</span></p>
+            <p>— DOU</p>
+          </div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- FLOW 4 -->
+  <div class="section" id="f4">
+    <h2>Flujo 4 — Recompra <span class="badge badge-same">Sin cambios</span></h2>
+    <div class="flow-header">
+      <div class="row"><span class="label">Trigger</span><span class="value">Ultima Placed Order hace 21 dias (4.1) y 35 dias (4.2) sin nueva compra</span></div>
+      <div class="row"><span class="label">Objetivo</span><span class="value">Reactivar recompra en la ventana natural de consumo (una caja dura 3-5 semanas)</span></div>
+      <div class="row"><span class="label">Empalme</span><span class="value">Si a dia 35 sigue sin comprar → dia 60 entra a Winback (Flujo 7)</span></div>
+    </div>
+
+    <details class="email-card">
+      <summary><span class="badge badge-same">Sin cambios</span> Email 4.1 — ¿Ya te quedaste sin alfajores? <span style="color:var(--text-muted);font-weight:400;font-size:12px;margin-left:auto;">Dia 21</span></summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">¿Se termino la caja? Es momento.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Si sacamos la cuenta bien, ya deberia estar quedando poco de tu ultima caja (o nada, seamos realistas).</p>
+          <p>Es un buen momento para volver a pedir, antes de que la ansiedad por alfajor te agarre en el peor momento.</p>
+          <p><span class="email-cta">Pedir de nuevo →</span></p>
+          <p>— DOU</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="email-card">
+      <summary><span class="badge badge-same">Sin cambios</span> Email 4.2 — Tus DOU coins te estan esperando <span style="color:var(--text-muted);font-weight:400;font-size:12px;margin-left:auto;">Dia 35</span></summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Tenes DOU coins juntandose polvo</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Tenes DOU coins acumulados en tu cuenta de DOU Gang. No se vencen manana, pero tampoco es que esten para juntar polvo.</p>
+          <p>Tu proxima compra es un buen momento para usarlos.</p>
+          <p><span class="email-cta">Ver mis DOU coins →</span> <span class="email-cta-secondary">Volver a pedir →</span></p>
+          <p>— DOU</p>
+        </div>
+        <div class="email-notes">A partir de aca, si no hay compra, el contacto queda "en espera" hasta dia 60 donde entra a Winback. No se envia nada entre dia 36 y dia 60.</div>
+      </div>
+    </details>
+  </div>
+
+  <hr class="divider">
+
+  <!-- FLOW 5 -->
+  <div class="section" id="f5">
+    <h2>Flujo 5 — Cumpleanos <span class="badge badge-same">Sin cambios</span></h2>
+    <div class="flow-header">
+      <div class="row"><span class="label">Trigger</span><span class="value">Fecha de cumpleanos del contacto</span></div>
+      <div class="row"><span class="label">Objetivo</span><span class="value">Gesto de marca + refuerzo de DOU Gang via coins</span></div>
+      <div class="row"><span class="label">Excepcion</span><span class="value">Puede convivir con cualquier otro flow activo</span></div>
+    </div>
+
+    <details class="email-card">
+      <summary><span class="badge badge-same">Sin cambios</span> Email 5.1 — Feliz cumple, en serio</summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Feliz cumple de parte de la Manada 🎂</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">Te dejamos 200 DOU coins de regalo.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>¡Feliz cumpleanos!</p>
+          <p>Para festejar como corresponde, te sumamos <strong>200 DOU coins</strong> directo a tu cuenta en DOU Gang. Usalos como mas te guste en tu proxima compra.</p>
+          <p><span class="email-cta">Ver mis coins →</span></p>
+          <p>Que la pases redondo (como un alfajor).<br>— DOU</p>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <hr class="divider">
+
+  <!-- FLOW 6 -->
+  <div class="section" id="f6">
+    <h2>Flujo 6 — Browse Abandonment <span class="badge badge-new">Nuevo</span></h2>
+    <div class="flow-header">
+      <div class="row"><span class="label">Trigger</span><span class="value">Viewed Product sin Added to Cart ni Placed Order, 2-24 horas</span></div>
+      <div class="row"><span class="label">Objetivo</span><span class="value">Recuperar interes temprano. Tono de contenido/sensorial, no urgencia de checkout</span></div>
+      <div class="row"><span class="label">Cond. Split</span><span class="value">Segun sabor visto (NOM/XD/NT/MIX) — personalizar bloque sin cross-sell</span></div>
+      <div class="row"><span class="label">Exclusion</span><span class="value">Excluir si esta en Carrito Abandonado o si compro ese producto en los ultimos 30 dias</span></div>
+    </div>
+
+    <details class="email-card">
+      <summary><span class="badge badge-new">Nuevo</span> Email 6.1 — ¿Te quedaste pensando en...? <span style="color:var(--text-muted);font-weight:400;font-size:12px;margin-left:auto;">2-4 horas</span></summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Se ve que algo te llamo la atencion 👀</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Vimos que te quedaste mirando <strong>[nombre del sabor visto]</strong>. Buena eleccion, la verdad.</p>
+          <p><em>[Bloque dinamico de producto: imagen, nombre, precio]</em></p>
+          <p>Por si te ayuda a decidir: masa que no se rompe al primer mordisco, relleno generoso, cero relleno de mentira.</p>
+          <p><span class="email-cta">Ver [sabor] de nuevo →</span></p>
+          <p>— DOU</p>
+        </div>
+        <div class="email-notes">Bloque dinamico trae el producto exacto visto. No incluir otros sabores (respeta decision de no cross-sell).</div>
+      </div>
+    </details>
+
+    <details class="email-card">
+      <summary><span class="badge badge-new">Nuevo</span> Email 6.2 — Seguis sin decidirte <span style="color:var(--text-muted);font-weight:400;font-size:12px;margin-left:auto;">24 horas</span></summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Todavia te espera en el carrito virtual</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p><strong>[Sabor]</strong> te sigue esperando. Y no sos el unico mirandolo: es de los favoritos dentro de DOU Gang.</p>
+          <p><em>[Bloque dinamico de producto + resenas si estan disponibles]</em></p>
+          <p>Nada de apuro artificial, pero si un dato real: las cajas se preparan en tandas, asi que si lo estas pensando, mejor no dejarlo para la semana que viene.</p>
+          <p><span class="email-cta">Lo quiero →</span></p>
+          <p>— DOU</p>
+        </div>
+        <div class="email-notes">Solo 2 emails. Si no hay conversion, el contacto queda disponible para campanas de Fase 2 pero no se insiste mas via flow.</div>
+      </div>
+    </details>
+  </div>
+
+  <hr class="divider">
+
+  <!-- FLOW 7 -->
+  <div class="section" id="f7">
+    <h2>Flujo 7 — Winback <span class="badge badge-new">Nuevo</span></h2>
+    <div class="flow-header">
+      <div class="row"><span class="label">Trigger</span><span class="value">Ultima Placed Order hace 60/90/120 dias sin compra nueva</span></div>
+      <div class="row"><span class="label">Objetivo</span><span class="value">Recuperar clientes enfriados en 3 pulsos de intensidad creciente</span></div>
+      <div class="row"><span class="label">Cond. Split</span><span class="value">En Email 7.3 — segun si tiene DOU coins acumulados sin usar</span></div>
+      <div class="row"><span class="label">Exclusion</span><span class="value">Solo compradores previos. Excluir si esta en Recompra</span></div>
+    </div>
+
+    <details class="email-card">
+      <summary><span class="badge badge-new">Nuevo</span> Email 7.1 — Te extranamos en la Manada <span style="color:var(--text-muted);font-weight:400;font-size:12px;margin-left:auto;">Dia 60</span></summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Hace rato que no te vemos por aca</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Hace ya un par de meses que no haces un pedido y la verdad, se nota.</p>
+          <p>Por si se te paso: seguimos siendo los mismos 3 sabores de siempre (NOM, XD, NT) mas la caja MIX para no elegir.</p>
+          <p><span class="email-cta">Volver a pedir →</span></p>
+          <p>— DOU</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="email-card">
+      <summary><span class="badge badge-new">Nuevo</span> Email 7.2 — Tus DOU coins siguen ahi <span style="color:var(--text-muted);font-weight:400;font-size:12px;margin-left:auto;">Dia 90</span></summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Tenes algo pendiente en tu cuenta DOU Gang</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Seguis teniendo DOU coins acumulados de tus compras anteriores. Nada te apura, pero es un lindo motivo para volver.</p>
+          <p>Recordatorio tambien de que el envio es gratis a partir de $40.000, por si estabas dudando si valia la pena pedir de nuevo.</p>
+          <p><span class="email-cta">Ver mis coins y pedir →</span></p>
+          <p>— DOU</p>
+        </div>
+      </div>
+    </details>
+
+    <h4>Email 7.3 — Dia 120: Conditional Split por saldo de coins</h4>
+
+    <div class="branch">
+      <div class="branch-label">Rama A — Tiene coins acumulados</div>
+      <details class="email-card">
+        <summary><span class="badge badge-new">Nuevo</span> Email 7.3A — Ultima: tenes coins esperandote</summary>
+        <div class="email-body">
+          <div class="email-field">Asunto</div>
+          <div class="email-subject">Ultima: tenes coins esperandote</div>
+          <div class="email-field">Cuerpo</div>
+          <div class="email-copy">
+            <p>Esta va a ser la ultima vez que te escribamos por un rato largo. Tenes DOU coins acumulados esperando y la verdad, nos encantaria que los uses antes de que dejemos de mandarte novedades tan seguido.</p>
+            <p><span class="email-cta">Usar mis coins ahora →</span></p>
+            <p>Si preferis no recibir mas mails nuestros, tambien lo podes elegir aca abajo. Sin rencores.<br>— DOU</p>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div class="branch">
+      <div class="branch-label">Rama B — Sin coins</div>
+      <details class="email-card">
+        <summary><span class="badge badge-new">Nuevo</span> Email 7.3B — ¿Seguis queriendo saber de DOU?</summary>
+        <div class="email-body">
+          <div class="email-field">Asunto</div>
+          <div class="email-subject">¿Seguis queriendo saber de DOU?</div>
+          <div class="email-field">Cuerpo</div>
+          <div class="email-copy">
+            <p>Venimos escribiendote hace un tiempo y no hubo mucho ida y vuelta. Todo bien, pasa.</p>
+            <p>Si te interesa seguir en la Gang, te dejamos la puerta abierta con lo de siempre: los 3 sabores y la caja MIX.</p>
+            <p><span class="email-cta">Ver los sabores →</span></p>
+            <p>Si preferis que bajemos la frecuencia de mails, avisanos con este link.<br>— DOU</p>
+          </div>
+          <div class="email-notes">Incluir link de gestion de preferencias en ambas ramas. Este email es el ultimo intento activo — de aca pasa a Sunset (Flujo 8) si sigue sin compra ni engagement.</div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- FLOW 8 -->
+  <div class="section" id="f8">
+    <h2>Flujo 8 — Sunset <span class="badge badge-new">Nuevo</span></h2>
+    <div class="flow-header">
+      <div class="row"><span class="label">Trigger</span><span class="value">180+ dias sin Placed Order Y sin apertura ni clic en los ultimos 90 dias</span></div>
+      <div class="row"><span class="label">Objetivo</span><span class="value">Higiene de lista y proteccion de deliverability — no es intento de venta</span></div>
+      <div class="row"><span class="label">Requisito</span><span class="value">Ya completo Winback sin conversion. No esta en ningun otro flow activo</span></div>
+    </div>
+
+    <details class="email-card">
+      <summary><span class="badge badge-new">Nuevo</span> Email 8.1 — ¿Seguimos o lo dejamos aca?</summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">¿Te seguimos escribiendo o mejor no?</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Hace bastante que no hay novedades entre nosotros — ni compras, ni siquiera que abras nuestros mails.</p>
+          <p>Antes de dejar de escribirte, preferimos preguntar directamente:</p>
+          <p><span class="email-cta">Si, quiero seguir sabiendo de DOU →</span> <span class="email-cta-secondary">No, dejen de escribirme →</span></p>
+          <p>Si no haces nada, vamos a asumir que es un "no" y vamos a bajar bastante la frecuencia con la que te contactamos.<br>— DOU</p>
+        </div>
+        <div class="email-notes">
+          Clic en CTA principal → mover a lista activa normal, reingresa al pool de campanas de Fase 2.<br>
+          Clic en CTA secundario o sin respuesta en 14 dias → mover a lista de supresion de flujos promocionales (mantener solo transaccionales).<br>
+          Este flow protege el sender score — clave en una lista chica donde cada apertura/no-apertura pesa proporcionalmente mucho.
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <hr class="divider">
+
+  <!-- FLOW 9 -->
+  <div class="section" id="f9">
+    <h2>Flujo 9 — Referido <span class="badge badge-new">Nuevo</span></h2>
+    <div class="flow-header">
+      <div class="row"><span class="label">Trigger</span><span class="value">Clientes satisfechos: Placed Order hace 14+ dias + respuesta positiva en encuesta de Post-Compra o 2+ compras</span></div>
+      <div class="row"><span class="label">Objetivo</span><span class="value">Nuevas altas via boca en boca. Recompensa en DOU coins para ambas partes, nunca descuento</span></div>
+      <div class="row"><span class="label">Exclusion</span><span class="value">Excluir a quienes respondieron negativo/neutro en la encuesta de satisfaccion</span></div>
+    </div>
+
+    <details class="email-card">
+      <summary><span class="badge badge-new">Nuevo</span> Email 9.1 — Invita a alguien a la Manada</summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Invita a un amigo, ganan los dos</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">Ellos prueban DOU, vos sumas DOU coins.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Ya sos de los que probo DOU y le gusto. Che, ¿por que no invitas a alguien mas a la Gang?</p>
+          <p>Asi funciona:<br>
+          - Compartis tu link personal con quien quieras.<br>
+          - Esa persona hace su primera compra.<br>
+          - Los dos suman DOU coins: vos por invitar, ellos por sumarse.</p>
+          <p>Nada de porcentajes raros ni letra chica. Simple.</p>
+          <p><span class="email-cta">Conseguir mi link para compartir →</span></p>
+          <p>— DOU</p>
+        </div>
+        <div class="email-notes">Link de referido via integracion de DOU Gang (Smile.io / Yotpo Loyalty). Recompensa en coins, nunca en $ de descuento.</div>
+      </div>
+    </details>
+
+    <details class="email-card">
+      <summary><span class="badge badge-new">Nuevo</span> Email 9.2 — Recordatorio: tu link sigue activo <span style="color:var(--text-muted);font-weight:400;font-size:12px;margin-left:auto;">Dia 10</span></summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Tu link para invitar sigue esperando</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Por si se te paso: todavia tenes tu link personal de invitacion activo. Cada persona que se sume por tu link, suma coins para los dos.</p>
+          <p>Pensa en esa persona que siempre te pide que le compartas algo rico. Es el momento.</p>
+          <p><span class="email-cta">Ver mi link de nuevo →</span></p>
+          <p>— DOU</p>
+        </div>
+        <div class="email-notes">Solo se envia si no hubo clic en el CTA del Email 9.1. No hay tercer recordatorio — mantener el tono simpatico, no pesado.</div>
+      </div>
+    </details>
+  </div>
+
+  <hr class="divider">
+
+  <!-- NOTAS TRANSVERSALES -->
+  <div class="callout">
+    <strong>Notas transversales de implementacion en Klaviyo:</strong><br>
+    Triggers basados en eventos de WooCommerce (Placed Order, Checkout Started, Viewed Product, Added to Cart) deben estar sincronizados via la integracion nativa. Verificar que Viewed Product trackee correctamente antes de activar Browse Abandonment. DOU coins asumen integracion de loyalty como propiedad de perfil (<code>dou_coins_balance</code>). Smart Sending y throttling a nivel de cuenta. Naming sugerido: <code>01 - Bienvenida</code>, <code>02 - Carrito Abandonado</code>, etc. para que el orden de prioridad sea visualmente evidente.
+  </div>
+
+  <hr class="divider">
+
+  <!-- ===== SECCION A — OPERACIONES ===== -->
+
+  <!-- SEGMENTACION -->
+  <div class="section" id="segmentacion">
+    <h2>Segmentacion (300 personas)</h2>
+    <p>Tres segmentos, no quince. Simple, accionable y facil de mantener a mano.</p>
+
+    <h3>1. Engaged (motor de todos los envios)</h3>
+    <p><strong>Definicion en Klaviyo:</strong> perfil que abrio O clickeo al menos un email en los ultimos 90 dias, O que tiene un Placed Order en los ultimos 90 dias (para no penalizar compradores reales por Apple MPP).</p>
+    <p><strong>Tamano esperado:</strong> 180-230 personas si la base esta sana.</p>
+    <p><strong>Uso:</strong> audiencia por defecto de toda campana de Fase 2. Ninguna campana masiva sale a "lista completa sin filtrar" nunca mas.</p>
+
+    <h3>2. VIP (trato diferencial, no descuento)</h3>
+    <p><strong>Definicion en Klaviyo:</strong> top 10% por cantidad de pedidos o gasto total acumulado — aprox. <strong>30 personas</strong>. Se recalcula una vez por trimestre.</p>
+    <p><strong>Uso:</strong> acceso anticipado real (24-48hs antes que el resto) en lanzamientos y CyberMonday, reconocimiento en el newsletter. El beneficio VIP nunca es un descuento de precio — es tiempo, exclusividad, coins bonus o reconocimiento.</p>
+
+    <h3>3. Cold (proteccion de deliverability)</h3>
+    <p><strong>Definicion en Klaviyo:</strong> perfil que no abrio ni clickeo ningun email en los ultimos 90 dias y no tiene compras en los ultimos 90 dias.</p>
+    <p><strong>Uso:</strong> no recibe campanas promocionales de alto volumen. Solo recibe, como maximo, un toque liviano por trimestre (newsletter, sin oferta) para darle una ultima chance de reengancharse antes de Sunset.</p>
+
+    <div class="callout">
+      <strong>Regla para quien ejecuta:</strong> antes de programar cualquier campana, la audiencia por defecto es Engaged. Solo se agrega VIP como bloque diferenciado, y Cold solo entra en el newsletter trimestral de bajo impacto.
+    </div>
+  </div>
+
+  <!-- FREQUENCY CAPPING -->
+  <div class="section" id="frequency">
+    <h2>Frequency Capping</h2>
+    <ul>
+      <li><strong>Maximo por perfil:</strong> 1 email de campana + 1 email de flujo por dia.</li>
+      <li><strong>Smart Sending:</strong> ventana de 16 horas minimo entre dos envios de campana a un mismo perfil.</li>
+      <li><strong>Supresion cross-flow:</strong> cada flujo debe tener un Flow Filter: "no enviar si el perfil recibio un email de campana en las ultimas 24hs" y viceversa.</li>
+      <li><strong>Noviembre:</strong> maximo 2 emails de campana por perfil por semana, sin excepcion.</li>
+      <li><strong>Silencio:</strong> al menos una semana completa sin ninguna campana antes de diciembre.</li>
+    </ul>
+  </div>
+
+  <!-- DELIVERABILITY -->
+  <div class="section" id="deliverability">
+    <h2>Deliverability</h2>
+    <ul>
+      <li><strong>SPF / DKIM / DMARC:</strong> verificar los tres en Klaviyo (Settings → Domains). Si DMARC esta en <code>p=none</code>, moverlo a <code>p=quarantine</code> progresivamente.</li>
+      <li><strong>Dominio dedicado:</strong> confirmar subdominio propio (ej. <code>mail.doufoods.com</code>), no compartido de Klaviyo.</li>
+      <li><strong>Reply-to:</strong> casilla real y monitoreada (ej. <code>hola@doufoods.com</code>), nunca <code>no-reply@</code>. Una vez por trimestre invitar a responder ("responde este mail, lo lee Benja").</li>
+      <li><strong>Double opt-in:</strong> activar para altas nuevas via pop-up (no para clientes que compraron).</li>
+    </ul>
+
+    <h3>Umbrales de alerta (por campana)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Metrica</th><th>Objetivo</th><th>Alerta</th></tr></thead>
+        <tbody>
+          <tr><td>Bounce rate</td><td>&lt;2%</td><td>Pausar y auditar si supera 5%</td></tr>
+          <tr><td>Spam complaint rate</td><td>&lt;0.1%</td><td>Pausar tipo de campana si supera 0.3%</td></tr>
+          <tr><td>Unsubscribe rate</td><td>&lt;0.5%</td><td>Revisar frecuencia/oferta si supera 1%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- DOU GANG -->
+  <div class="section" id="dougang">
+    <h2>DOU Gang — Economia de Coins</h2>
+    <p>Lo que faltaba para que DOU Gang deje de ser narrativa y pase a ser un mecanismo real de comportamiento.</p>
+
+    <h3>Como se ganan coins</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Accion</th><th>Coins</th></tr></thead>
+        <tbody>
+          <tr><td>Compra</td><td><strong>10 coins por cada $1.000 gastados</strong> (ej. una caja de $19.990 = ~200 coins)</td></tr>
+          <tr><td>Referido — quien refiere</td><td><strong>300 coins</strong> cuando el amigo hace su primera compra</td></tr>
+          <tr><td>Referido — el amigo</td><td><strong>100 coins de bienvenida</strong> en su primera compra</td></tr>
+          <tr><td>Cumpleanos</td><td><strong>200 coins</strong></td></tr>
+          <tr><td>Dejar una resena</td><td><strong>50 coins</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Tiers</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Tier</th><th>Rango</th><th>Que significa</th></tr></thead>
+        <tbody>
+          <tr><td><strong>DOU Fan</strong></td><td>0 – 499</td><td>Recien llegado. Todos arrancan aca.</td></tr>
+          <tr><td><strong>DOU Gang</strong></td><td>500 – 1.499</td><td>Ya compro mas de una vez o refirio a alguien. Reconocimiento en newsletter.</td></tr>
+          <tr><td><strong>DOU OG</strong></td><td>1.500+</td><td>Nucleo duro. Acceso anticipado real, mencion directa de Benja.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:13px;">Con 200 coins por compra, llegar a DOU Gang toma ~2-3 compras, y a DOU OG ~7-8 compras — umbrales alcanzables.</p>
+
+    <h3>Canje</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Coins</th><th>Beneficio</th></tr></thead>
+        <tbody>
+          <tr><td>500</td><td>Envio gratis en cualquier pedido (sin minimo)</td></tr>
+          <tr><td>1.500</td><td>Una caja de 12 gratis</td></tr>
+          <tr><td>3.000</td><td>Pack de merch DOU</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Vencimiento</h3>
+    <p>Los coins vencen a los <strong>12 meses de inactividad</strong> (sin ninguna compra en ese periodo) — no por antiguedad del coin individual, sino por inactividad total de la cuenta.</p>
+
+    <h3>Visibilidad del balance</h3>
+    <p>El saldo debe sincronizarse como custom property (<code>dou_coins_balance</code>) en Klaviyo y aparecer como bloque dinamico en: todos los emails transaccionales, el newsletter mensual ("Tu saldo DOU Gang: X coins — te faltan Y para envio gratis"), y el email de Cierre de Temporada.</p>
+  </div>
+
+  <!-- METRICAS -->
+  <div class="section" id="metricas">
+    <h2>Metricas y KPIs</h2>
+
+    <h3>Nivel programa</h3>
+    <ul>
+      <li><strong>RPR (Revenue per Recipient)</strong> — metrica primaria de cada campana y flujo. No Open Rate.</li>
+      <li><strong>Click Rate</strong> — metrica secundaria de salud de contenido.</li>
+      <li><strong>% de revenue total de ecommerce atribuible a email</strong> — objetivo 30%.</li>
+      <li><strong>% de revenue flujos vs. campanas</strong> — objetivo 60/40 a favor de flujos.</li>
+    </ul>
+
+    <h3>Nivel flujo</h3>
+    <ul>
+      <li>Conversion por email individual dentro de cada flujo.</li>
+      <li>Tasa de recuperacion de carrito abandonado.</li>
+      <li>Tasa de resenas obtenidas por post-compra.</li>
+    </ul>
+
+    <h3>Nivel deliverability</h3>
+    <ul>
+      <li>Bounce rate &lt;2%. Spam complaint &lt;0.1%. Unsubscribe &lt;0.5%.</li>
+      <li>Tamano y tendencia del segmento Engaged mes a mes.</li>
+    </ul>
+
+    <h3>Nivel loyalty</h3>
+    <ul>
+      <li>Tasa de canje de coins emitidos.</li>
+      <li>Tasa de uso del referido (codigos generados vs. canjeados).</li>
+    </ul>
+
+    <div class="callout">
+      <strong>Cadencia de revision:</strong> Reporte mensual (primera semana del mes siguiente). En noviembre y diciembre, revision quincenal.
+    </div>
+  </div>
+
+  <!-- A/B TESTING -->
+  <div class="section" id="abtesting">
+    <h2>Protocolo de A/B Testing</h2>
+    <ul>
+      <li>Solo en campanas de lista completa (Engaged, ~200+ personas). Nunca en flujos.</li>
+      <li>Una sola variable por test (subject line, CTA o from-name).</li>
+      <li>Metrica de decision: Click Rate o RPR. Nunca Open Rate.</li>
+      <li>Tamano minimo de muestra: 100+ perfiles por variante.</li>
+      <li>Registro obligatorio de cada test: hipotesis, variantes, metrica, tamano, resultado.</li>
+    </ul>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ===== FASE 2: CAMPANAS ===== -->
+
+  <!-- NEWSLETTER -->
+  <div class="section" id="newsletter">
+    <h2>Newsletter — DOU Gang Report (mensual)</h2>
+    <div class="flow-header">
+      <div class="row"><span class="label">Segmento</span><span class="value">Engaged (+ Cold recibe version abreviada, sin oferta, 1x por trimestre)</span></div>
+      <div class="row"><span class="label">Frecuencia</span><span class="value">1 vez por mes, primer jueves del mes</span></div>
+      <div class="row"><span class="label">A/B Testing</span><span class="value">SI — testear subject line, decidir por Click Rate</span></div>
+    </div>
+
+    <details class="email-card" open>
+      <summary>Newsletter — DOU Gang Report</summary>
+      <div class="email-body">
+        <div class="email-field">Asunto (Variante A)</div>
+        <div class="email-subject">El DOU Gang Report de {{ mes }} 📬</div>
+        <div class="email-field">Asunto (Variante B)</div>
+        <div class="email-subject">Tu resumen del mes, DOU Gang</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">Tu saldo de coins, el sabor del mes y lo que se viene. Sin vueltas.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Hola {{ first_name }},</p>
+          <p>Otro mes, otro Report. Aca va lo que paso en la Gang.</p>
+          <p><strong>Tu saldo DOU Gang:</strong> tenes <strong>{{ dou_coins_balance }} coins</strong>. [Bloque condicional segun saldo: si &lt;500, "te faltan X para envio gratis"; si &lt;1500, "ya podes canjear envio gratis, te faltan X para caja gratis"; si 1500+, "sos DOU OG, podes canjear tu caja gratis".]</p>
+          <p><strong>El sabor del mes: {{ sabor_destacado }}.</strong> [Un parrafo corto contando algo real del sabor — de donde sale, como se hace, una anecdota de produccion. Contenido de marca, no cross-sell.]</p>
+          <p><strong>Lo que se viene:</strong> [1-2 lineas sobre el proximo evento del calendario.]</p>
+          <p><strong>Un saludo de Benja:</strong> [Espacio fijo mensual — una linea o video corto de Benja contando algo genuino. Este bloque lo construye como personaje conocido mes a mes.]</p>
+          <p>Responde este mail si queres — lo lee Benja, posta.</p>
+          <p><span class="email-cta">Ver la tienda</span> <span class="email-cta-secondary">Ver mi saldo completo</span></p>
+          <p>— El equipo DOU</p>
+        </div>
+        <div class="email-notes">Eliminar mencion de "Top 5" como unico gancho de gamificacion — reemplazar por bloque de tier/balance individual.</div>
+      </div>
+    </details>
+  </div>
+
+  <!-- DIA DEL ESTUDIANTE -->
+  <div class="section" id="estudiante">
+    <h2>Dia del Estudiante (21 sept)</h2>
+    <div class="flow-header">
+      <div class="row"><span class="label">Segmento</span><span class="value">Engaged</span></div>
+      <div class="row"><span class="label">A/B Testing</span><span class="value">NO (campana chica, un solo subject)</span></div>
+    </div>
+
+    <details class="email-card" open>
+      <summary>Campana — Dia del Estudiante</summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">21 de septiembre. Excusa oficial para comprar DOU.</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">Primavera + estudiantes + alfajores = matematica perfecta.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>{{ first_name }}, es 21 de septiembre.</p>
+          <p>Que no sea el companero de banco el que se coma tu merienda — lleva los tuyos.</p>
+          <p>Caja de 12, elegis entre NOM, XD, NT o el MIX si no te podes decidir (nosotros tampoco podriamos).</p>
+          <p>Envio gratis a partir de $40.000.</p>
+          <p>Feliz dia a los estudiantes, a los que ya se recibieron y siguen actuando como estudiantes, y a los que solo querian el dia libre.</p>
+          <p><span class="email-cta">Quiero mi caja</span></p>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <!-- DIA DE LA MADRE -->
+  <div class="section" id="madre">
+    <h2>Dia de la Madre (18 oct) — opcional</h2>
+    <div class="flow-header">
+      <div class="row"><span class="label">Segmento</span><span class="value">Engaged (tono levemente menos "Gang")</span></div>
+      <div class="row"><span class="label">A/B Testing</span><span class="value">NO</span></div>
+    </div>
+
+    <details class="email-card" open>
+      <summary>Campana — Dia de la Madre</summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Un regalo que no se rompe ni pasa de moda</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">Practico, rico y llega a tiempo. Asi de simple.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Regalarle algo a mama no tiene por que ser una odisea.</p>
+          <p>Una caja de DOU es un regalo que funciona: no es talle, no es color, no hay que adivinar el gusto (hay tres, y tambien el MIX para no arriesgar).</p>
+          <p>Si queres, agregamos una tarjeta con tu mensaje adentro de la caja — sin cargo, solo contanos que queres que diga.</p>
+          <p>Envio gratis a partir de $40.000. Pedilo esta semana para que llegue antes del domingo.</p>
+          <p><span class="email-cta">Regalar una caja DOU</span></p>
+        </div>
+        <div class="email-notes">La tarjeta personalizada gratuita es un agregado de servicio, no de precio — alternativa "premium/emocional" sin usar descuento.</div>
+      </div>
+    </details>
+  </div>
+
+  <!-- NOVIEMBRE -->
+  <div class="section" id="noviembre">
+    <h2>Noviembre — Calendario Protegido</h2>
+    <p>La parte mas sensible del ano. Maximo 2 campanas por perfil por semana. El calendario esta disenado para que ninguna semana lo rompa.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Semana</th><th>Envio</th><th>Audiencia</th><th>Campanas</th></tr></thead>
+        <tbody>
+          <tr><td>19-25 oct</td><td>Lanzamiento — Teaser</td><td>Engaged</td><td>1/2</td></tr>
+          <tr><td>26 oct-1 nov</td><td>Lanzamiento — Acceso Anticipado</td><td>VIP (~30)</td><td>1/2</td></tr>
+          <tr><td>2-8 nov</td><td>Reveal + CyberMonday</td><td>Engaged</td><td><strong>2/2 — tope</strong></td></tr>
+          <tr><td>9-15 nov</td><td>Newsletter de noviembre</td><td>Engaged</td><td>1/2</td></tr>
+          <tr><td>16-22 nov</td><td>Sin campanas — silencio</td><td>—</td><td>0/2</td></tr>
+          <tr><td>23-29 nov</td><td>Black Friday: SKIP</td><td>—</td><td>0/2</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:13px;color:var(--text-muted);">Total noviembre: 5 envios (Teaser, Acceso VIP, Reveal, CyberMonday, Newsletter) — contra los 8-10+ del plan original.</p>
+
+    <h3>Lanzamiento — Teaser</h3>
+    <details class="email-card">
+      <summary>4.1 Teaser <span style="color:var(--text-muted);font-weight:400;font-size:12px;margin-left:auto;">Semana 19-25 oct</span></summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Algo se esta cocinando en DOU</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>{{ first_name }}, hay algo nuevo en camino.</p>
+          <p>No vamos a spoilear nada todavia — solo esto: si sos de la Gang, te enteras antes que nadie. Literal, antes que nadie.</p>
+          <p>Quedate atento a tu mail estos dias.</p>
+          <p><span class="email-cta">Quiero ser de los primeros en enterarme</span></p>
+        </div>
+      </div>
+    </details>
+
+    <h3>Lanzamiento — Acceso Anticipado VIP</h3>
+    <details class="email-card">
+      <summary>4.2 Acceso VIP <span style="color:var(--text-muted);font-weight:400;font-size:12px;margin-left:auto;">Semana 26 oct-1 nov, solo VIP</span></summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Para vos, antes que para todos: asi es el nuevo DOU</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>{{ first_name }}, esto es solo para vos.</p>
+          <p>Antes de mostrarselo a toda la Gang, queriamos que lo veas primero — porque sos parte del grupo que mas aposto por DOU este ano.</p>
+          <p><em>[Reveal del producto — nombre, descripcion, foto]</em></p>
+          <p>Podes pedirlo desde ahora. El resto de la Gang se entera en unos dias.</p>
+          <p><span class="email-cta">Quiero el nuevo DOU ahora</span></p>
+        </div>
+        <div class="email-notes">Envio exclusivo a VIP (~30 personas). Acceso anticipado real, no la misma campana con etiqueta distinta.</div>
+      </div>
+    </details>
+
+    <h3>Lanzamiento — Reveal / Dia D</h3>
+    <details class="email-card">
+      <summary>4.3 Reveal <span style="color:var(--text-muted);font-weight:400;font-size:12px;margin-left:auto;">Semana 2-8 nov (1/2)</span></summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Ya esta. Esto es lo nuevo de DOU.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>{{ first_name }}, llego el dia.</p>
+          <p><em>[Presentacion del producto nuevo — nombre, descripcion, por que existe, foto/video]</em></p>
+          <p>Ya lo podes sumar a tu pedido. Y si compraste antes de hoy, sumas coins igual que siempre.</p>
+          <p><span class="email-cta">Quiero el nuevo DOU</span></p>
+        </div>
+      </div>
+    </details>
+
+    <h3>CyberMonday</h3>
+    <div class="callout">
+      <strong>Sin descuento de precio.</strong> El mecanismo es coins x2 + envio gratis sin minimo de compra. Participa del momento comercial sin tocar el precio de lista.
+    </div>
+    <details class="email-card">
+      <summary>4.4 CyberMonday <span style="color:var(--text-muted);font-weight:400;font-size:12px;margin-left:auto;">Semana 2-8 nov (2/2) — A/B: SI</span></summary>
+      <div class="email-body">
+        <div class="email-field">Asunto (Variante A)</div>
+        <div class="email-subject">CyberMonday DOU: coins x2, sin minimo de envio</div>
+        <div class="email-field">Asunto (Variante B)</div>
+        <div class="email-subject">Tu CyberMonday sin descuentos raros, con coins x2</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">Nada de "hasta agotar stock" ni cuenta regresiva falsa. Es simple: el doble de coins y el envio corre por nuestra cuenta.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>{{ first_name }}, sin vueltas.</p>
+          <p>Del 3 al 5 de noviembre, todo pedido en DOU suma <strong>el doble de DOU coins</strong> y el <strong>envio va gratis, sin minimo de compra</strong>.</p>
+          <p>No bajamos el precio de la caja — preferimos que ese valor se lo lleve tu saldo de la Gang, no un descuento que se olvida al mes siguiente.</p>
+          <p>Termina el jueves a la noche. Despues, todo vuelve a la normalidad.</p>
+          <p><span class="email-cta">Pedir con coins x2</span></p>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <!-- BLACK FRIDAY -->
+  <div class="section" id="blackfriday">
+    <h2>Black Friday — SE ELIMINA</h2>
+    <div class="callout" style="border-left-color:var(--badge-same);">
+      <strong>Recomendacion: SKIP.</strong> No se envia campana de Black Friday. Justificacion:
+      <ul style="margin-top:8px;">
+        <li>Noviembre ya usa su presupuesto de atencion en Lanzamiento + CyberMonday.</li>
+        <li>Sin descuentos como palanca, Black Friday pierde logica comercial.</li>
+        <li>Repetir coins x2 dos semanas despues le resta impacto a ambas campanas.</li>
+        <li>Una tercera campana de "evento comercial" en menos de un mes = fatiga y dano a deliverability justo antes de diciembre.</li>
+      </ul>
+      <p style="margin-top:8px;">Si el equipo quiere aprovechar el trafico de Black Friday, puede sostenerse solo en el sitio (banner) y redes, sin sumar un envio mas.</p>
+    </div>
+  </div>
+
+  <!-- NAVIDAD -->
+  <div class="section" id="navidad">
+    <h2>Navidad y Fiestas (diciembre)</h2>
+    <div class="flow-header">
+      <div class="row"><span class="label">Segmento</span><span class="value">Engaged; VIP recibe Gift Guide con 24hs de anticipacion</span></div>
+      <div class="row"><span class="label">A/B Testing</span><span class="value">SI en Gift Guide (mayor volumen de diciembre)</span></div>
+    </div>
+
+    <details class="email-card">
+      <summary>7.1 Gift Guide de Fin de Ano <span style="color:var(--text-muted);font-weight:400;font-size:12px;margin-left:auto;">A/B: SI</span></summary>
+      <div class="email-body">
+        <div class="email-field">Asunto (Variante A)</div>
+        <div class="email-subject">Tu regalo de fin de ano ya esta resuelto</div>
+        <div class="email-field">Asunto (Variante B)</div>
+        <div class="email-subject">Tres sabores, una sola decision facil: regalar DOU</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>{{ first_name }}, diciembre es asi: mil cosas para resolver y poco tiempo.</p>
+          <p>Una caja DOU tacha de la lista amigo invisible, regalo de oficina, o "algo rico para cerrar el ano en casa".</p>
+          <p>Elegis NOM, XD, NT o el MIX. Envio gratis a partir de $40.000.</p>
+          <p>Pedilo esta semana para asegurarte que llegue antes de las fiestas.</p>
+          <p><span class="email-cta">Resolver mi regalo</span></p>
+        </div>
+      </div>
+    </details>
+
+    <details class="email-card">
+      <summary>7.2 Ultima Fecha de Envio</summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Ultimo dia para que tu DOU llegue antes de Nochebuena</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>{{ first_name }}, esto es solo un recordatorio operativo: <strong>{{ fecha_limite }}</strong> es el ultimo dia para pedir y que llegue antes de las fiestas.</p>
+          <p>Si ya tenes todo resuelto, ignora este mail y que tengas una hermosa Navidad.</p>
+          <p><span class="email-cta">Pedir ahora</span></p>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <!-- CIERRE -->
+  <div class="section" id="cierre">
+    <h2>DOU Gang — Cierre de Temporada (dic)</h2>
+    <div class="flow-header">
+      <div class="row"><span class="label">Segmento</span><span class="value">Engaged + VIP con bloque adicional de reconocimiento</span></div>
+      <div class="row"><span class="label">A/B Testing</span><span class="value">NO (campana de relacion, no de conversion)</span></div>
+    </div>
+
+    <details class="email-card" open>
+      <summary>Cierre de Temporada — Asi fue tu ano en la DOU Gang</summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Asi fue tu ano en la DOU Gang</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>{{ first_name }}, terminamos la temporada. Repasemos.</p>
+          <p><strong>Tu saldo final:</strong> {{ dou_coins_balance }} coins. Estas en <strong>{{ tier_actual }}</strong>.</p>
+          <p>[Bloque condicional por tier: DOU Fan → "el ano que viene arrancas con la posibilidad de llegar a DOU Gang, con un par de compras estas"; DOU Gang → "te falta poco para DOU OG, el ano que viene puede ser el tuyo"; DOU OG → "sos parte del nucleo duro de la marca, gracias en serio".]</p>
+          <p>Recorda: los coins vencen a los 12 meses de inactividad — con que hagas un pedido en el ano, tu saldo sigue en pie.</p>
+          <p><strong>Un cierre de Benja:</strong> [mensaje genuino de cierre de ano — que significo la temporada para la marca, agradecimiento real, sin venta forzada].</p>
+          <p>Nos vemos el ano que viene. Gracias por bancar a DOU.</p>
+          <p><span class="email-cta">Ver mi cuenta DOU Gang</span></p>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <hr class="divider">
+
+  <!-- B2B -->
+  <div class="section" id="b2b">
+    <h2>B2B / Distribuidores <span class="badge badge-new">Nuevo</span></h2>
+    <div class="flow-header">
+      <div class="row"><span class="label">Lista</span><span class="value">Separada de la D2C — kioscos, dieteticas, compras corporativas</span></div>
+      <div class="row"><span class="label">Tono</span><span class="value">Profesional, directo, sin jerga de "Gang"</span></div>
+      <div class="row"><span class="label">Oferta</span><span class="value">Precio mayorista (no descuento sobre D2C), pedido minimo, contacto dedicado</span></div>
+    </div>
+
+    <details class="email-card">
+      <summary><span class="badge badge-new">Nuevo</span> 9.1 Email de Introduccion</summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">DOU Foods para tu negocio: alfajores premium al por mayor</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">Pedido minimo bajo, precio mayorista y un contacto directo para vos.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Hola,</p>
+          <p>Somos DOU Foods. Hacemos alfajores premium (NOM, XD y NT) que hoy vendemos online, y estamos abriendo un canal mayorista para kioscos, dieteticas, oficinas y regalos empresariales.</p>
+          <p>Si tenes un local, una empresa que compra regalos de fin de ano, o simplemente crees que tus clientes/equipo se van a copar con DOU, esto te puede interesar:</p>
+          <p>- <strong>Precio mayorista</strong> por volumen (a definir segun cantidad).<br>
+          - <strong>Pedido minimo:</strong> [a definir con el equipo comercial].<br>
+          - <strong>Un contacto dedicado</strong> para pedidos recurrentes, sin pasar por la tienda online.</p>
+          <p>Si queres, coordinamos una llamada corta de 15 minutos para ver si tiene sentido para tu negocio.</p>
+          <p>Saludos,<br>[Nombre] — DOU Foods<br>comercial@doufoods.com</p>
+          <p><span class="email-cta">Quiero informacion mayorista</span></p>
+        </div>
+        <div class="email-notes">No enviar con placeholders sin resolver. Lista construida por prospeccion activa, no por opt-in del sitio D2C.</div>
+      </div>
+    </details>
+
+    <details class="email-card">
+      <summary><span class="badge badge-new">Nuevo</span> 9.2 Email de Seguimiento <span style="color:var(--text-muted);font-weight:400;font-size:12px;margin-left:auto;">7-10 dias despues</span></summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">¿Le damos una vuelta mas a lo de DOU para tu negocio?</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Hola de nuevo,</p>
+          <p>Te escribi hace unos dias sobre la posibilidad de sumar DOU a tu local/empresa con precio mayorista. Se que estas cosas quedan en la lista de pendientes, asi que va un empujoncito.</p>
+          <p>Si tiene sentido para vos, coordinamos 15 minutos esta semana o la que viene, sin compromiso. Si no es el momento, tambien me sirve saberlo para no insistir de mas.</p>
+          <p>Quedo atento.</p>
+          <p>[Nombre] — DOU Foods<br>comercial@doufoods.com</p>
+          <p><span class="email-cta">Coordinar una llamada</span></p>
+        </div>
+        <div class="email-notes">Solo a quienes no respondieron ni agendaron. Si no hay respuesta despues del segundo email, el prospecto sale de la secuencia activa y pasa a re-contacto trimestral.</div>
+      </div>
+    </details>
+  </div>
+
+  <hr class="divider">
+
+  <p style="text-align:center;font-size:12px;color:var(--text-muted);padding:20px 0;">
+    DOU Foods — Estrategia Definitiva de Email Marketing — Septiembre 2026<br>
+    9 flujos automatizados · 9 campanas · 3 segmentos · 1 economia de coins
+  </p>
+</main>
+
+<script>
+// Highlight active nav link on scroll
+const sections = document.querySelectorAll('.section[id]');
+const navLinks = document.querySelectorAll('.nav a[href^="#"]');
+
+function updateActive() {
+  let current = '';
+  for (const section of sections) {
+    const rect = section.getBoundingClientRect();
+    if (rect.top <= 120) current = section.id;
+  }
+  navLinks.forEach(link => {
+    link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+  });
+}
+
+window.addEventListener('scroll', updateActive, { passive: true });
+updateActive();
+
+// Smooth scroll for nav links
+navLinks.forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Close mobile nav
+      document.getElementById('nav').classList.remove('open');
+    }
+  });
+});
+</script>
