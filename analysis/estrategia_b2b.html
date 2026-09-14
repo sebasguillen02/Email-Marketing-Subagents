@@ -1,0 +1,1301 @@
+<title>DOU Foods B2B Strategy</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Source+Sans+3:ital,wght@0,300..900;1,300..900&display=swap">
+<style>
+:root {
+  --bg: #F7F8FA;
+  --bg-surface: #EDF0F4;
+  --bg-email: #FFFFFF;
+  --text: #1B2638;
+  --text-secondary: #4A5568;
+  --text-muted: #8494A7;
+  --accent: #0D7C66;
+  --accent-light: #E6F5F0;
+  --accent-hover: #0A6350;
+  --border: #D4DAE3;
+  --border-light: #E8ECF1;
+  --badge-phase: #7C3AED;
+  --badge-phase-bg: #F0EBFF;
+  --badge-confirm: #D97706;
+  --badge-confirm-bg: #FEF3C7;
+  --badge-event: #DC2626;
+  --badge-event-bg: #FEE2E2;
+  --nav-bg: #F0F2F6;
+  --nav-active: #0D7C66;
+  --shadow: rgba(27, 38, 56, 0.06);
+  --code-bg: #E8ECF1;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111827;
+    --bg-surface: #1E2736;
+    --bg-email: #243042;
+    --text: #E8ECF1;
+    --text-secondary: #A0AEC0;
+    --text-muted: #6B7B8F;
+    --accent: #34D399;
+    --accent-light: #162A23;
+    --accent-hover: #5EEAD4;
+    --border: #2D3B4F;
+    --border-light: #253244;
+    --badge-phase: #A78BFA;
+    --badge-phase-bg: #1E1640;
+    --badge-confirm: #FBBF24;
+    --badge-confirm-bg: #2A2008;
+    --badge-event: #F87171;
+    --badge-event-bg: #2A1010;
+    --nav-bg: #1A2332;
+    --nav-active: #34D399;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --code-bg: #253244;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111827;
+  --bg-surface: #1E2736;
+  --bg-email: #243042;
+  --text: #E8ECF1;
+  --text-secondary: #A0AEC0;
+  --text-muted: #6B7B8F;
+  --accent: #34D399;
+  --accent-light: #162A23;
+  --accent-hover: #5EEAD4;
+  --border: #2D3B4F;
+  --border-light: #253244;
+  --badge-phase: #A78BFA;
+  --badge-phase-bg: #1E1640;
+  --badge-confirm: #FBBF24;
+  --badge-confirm-bg: #2A2008;
+  --badge-event: #F87171;
+  --badge-event-bg: #2A1010;
+  --nav-bg: #1A2332;
+  --nav-active: #34D399;
+  --shadow: rgba(0, 0, 0, 0.3);
+  --code-bg: #253244;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+  line-height: 1.65;
+  display: flex;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+h1, h2, h3, h4 {
+  font-family: 'Outfit', 'Segoe UI', system-ui, sans-serif;
+  text-wrap: balance;
+  line-height: 1.2;
+}
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 240px;
+  height: 100vh;
+  overflow-y: auto;
+  background: var(--nav-bg);
+  border-right: 1px solid var(--border);
+  padding: 20px 0;
+  z-index: 10;
+}
+.nav-header {
+  padding: 0 16px 16px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 12px;
+}
+.nav-header h1 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 2px;
+  color: var(--accent);
+}
+.nav-header p {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500;
+}
+.nav-section {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  padding: 14px 16px 4px;
+  font-family: 'Outfit', sans-serif;
+}
+.nav a {
+  display: block;
+  padding: 5px 16px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  transition: all 0.15s;
+}
+.nav a:hover { color: var(--text); background: var(--bg-surface); }
+.nav a.active {
+  color: var(--nav-active);
+  border-left-color: var(--nav-active);
+  font-weight: 600;
+  background: var(--accent-light);
+}
+.nav-toggle {
+  display: none;
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 20;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+main {
+  margin-left: 240px;
+  flex: 1;
+  padding: 32px 40px;
+  padding-block: 32px;
+  max-width: 860px;
+}
+.section { margin-bottom: 48px; }
+.section h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.section h3 {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 28px 0 12px;
+  color: var(--text);
+}
+.section p { margin: 0 0 12px; color: var(--text-secondary); }
+.section ul { margin: 0 0 12px; padding-left: 20px; color: var(--text-secondary); }
+.section li { margin-bottom: 6px; }
+.badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  font-family: 'Outfit', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+.badge-phase { color: var(--badge-phase); background: var(--badge-phase-bg); }
+.badge-confirm { color: var(--badge-confirm); background: var(--badge-confirm-bg); }
+.badge-event { color: var(--badge-event); background: var(--badge-event-bg); }
+.badge-accent { color: var(--accent); background: var(--accent-light); }
+.callout {
+  border-left: 4px solid var(--accent);
+  background: var(--accent-light);
+  padding: 14px 18px;
+  border-radius: 0 6px 6px 0;
+  margin: 16px 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+.callout strong { color: var(--text); }
+.callout-warn {
+  border-left-color: var(--badge-confirm);
+  background: var(--badge-confirm-bg);
+}
+.flow-header {
+  background: var(--bg-surface);
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin: 12px 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.flow-header .row {
+  display: flex;
+  gap: 8px;
+  font-size: 13px;
+  align-items: baseline;
+}
+.flow-header .label {
+  font-weight: 600;
+  font-family: 'Outfit', sans-serif;
+  min-width: 80px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  padding-top: 2px;
+}
+.flow-header .value { color: var(--text-secondary); }
+.email-card {
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  margin: 10px 0;
+  background: var(--bg-email);
+}
+.email-card summary {
+  padding: 12px 16px;
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+  list-style: none;
+  flex-wrap: wrap;
+}
+.email-card summary::-webkit-details-marker { display: none; }
+.email-card summary::before {
+  content: '▸';
+  color: var(--text-muted);
+  font-size: 11px;
+  transition: transform 0.15s;
+}
+.email-card[open] summary::before { transform: rotate(90deg); }
+.email-card summary:hover { background: var(--bg-surface); }
+.email-body { padding: 0 16px 16px; border-top: 1px solid var(--border-light); }
+.email-field {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-top: 14px;
+  margin-bottom: 4px;
+  font-family: 'Outfit', sans-serif;
+}
+.email-subject {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+}
+.email-preview {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+.email-copy {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  background: var(--bg-surface);
+  border-radius: 6px;
+  padding: 16px;
+  margin-top: 8px;
+}
+.email-copy p { margin: 0 0 10px; }
+.email-copy p:last-child { margin: 0; }
+.email-cta {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 4px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  margin-top: 6px;
+}
+.email-notes {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: var(--code-bg);
+  border-radius: 4px;
+}
+.divider { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+th {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 2px solid var(--border);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  background: var(--bg-surface);
+}
+td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text-secondary);
+}
+tr.event-row { background: var(--badge-event-bg); font-weight: 600; }
+tr.event-row td { color: var(--text); }
+.table-wrap { overflow-x: auto; margin: 12px 0 20px; }
+.seg-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin: 12px 0 20px;
+}
+.seg-card {
+  background: var(--bg-surface);
+  border-radius: 6px;
+  padding: 14px 16px;
+}
+.seg-card h4 {
+  font-size: 13px;
+  margin: 0 0 8px;
+  color: var(--accent);
+}
+.seg-card p { font-size: 13px; margin: 0; }
+.seg-card ul { font-size: 13px; margin: 4px 0 0; padding-left: 16px; }
+.phase-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--badge-phase);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 24px 0 8px;
+  padding: 4px 0;
+  border-bottom: 1px dashed var(--border);
+}
+@media (max-width: 768px) {
+  .nav { display: none; position: fixed; width: 260px; }
+  .nav.open { display: block; }
+  .nav-toggle { display: block; }
+  main { margin-left: 0; padding: 60px 16px 32px; }
+  .seg-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<button class="nav-toggle" onclick="document.getElementById('nav').classList.toggle('open')">Menu</button>
+<nav class="nav" id="nav">
+  <div class="nav-header">
+    <h1>DOU Foods</h1>
+    <p>Estrategia B2B Distribuidores</p>
+  </div>
+  <div class="nav-links">
+    <div class="nav-section">General</div>
+    <a href="#contexto">Contexto y Objetivos</a>
+    <a href="#segmentacion">Segmentacion</a>
+    <a href="#calendario">Calendario Maestro</a>
+    <a href="#frecuencia">Reglas de Frecuencia</a>
+
+    <div class="nav-section">Campanas</div>
+    <a href="#juntada">Juntada DOU</a>
+    <a href="#newsletter">Newsletter</a>
+    <a href="#carrefour">Comunicacion Carrefour</a>
+    <a href="#snack">Lanzamiento Snack</a>
+    <a href="#promos">Promociones</a>
+    <a href="#winback">Win-back Mensual</a>
+
+    <div class="nav-section">Operaciones</div>
+    <a href="#tono">Tono y Voz</a>
+    <a href="#kpis">KPIs</a>
+  </div>
+</nav>
+
+<main>
+  <!-- ═══ CONTEXTO ═══ -->
+  <div class="section" id="contexto">
+    <h2>Contexto y Objetivos</h2>
+    <p>DOU Foods es una marca argentina de alfajores premium (70g) creada por Benja Calero, con tres variedades (NOM, XD y NT) mas una caja mix, fabricados en O'Higgins, Buenos Aires. La marca se distribuye a traves de una red B2B de kioscos, dieteticas y comercios de cercania.</p>
+
+    <p>El periodo septiembre-diciembre 2026 combina cuatro frentes:</p>
+    <ul>
+      <li><strong>Estacionalidad del alfajor:</strong> la categoria se resiente con el calor. Hay que sostener el vinculo y anticipar la transicion al nuevo snack.</li>
+      <li><strong>Lanzamiento del Snack DOU</strong> (noviembre): puente para no perder rotacion en el punto de venta durante el verano.</li>
+      <li><strong>Juntada DOU</strong> (sabado 10/10, fabrica): primer evento presencial con la red de distribuidores y sus familias.</li>
+      <li><strong>Ingreso a Carrefour:</strong> comunicado proactivamente para evitar lectura de amenaza en el canal tradicional.</li>
+    </ul>
+
+    <h3>Objetivos del periodo</h3>
+    <div class="flow-header">
+      <div class="row"><span class="label">Cadencia</span><span class="value">Maximo 3 envios por semana, newsletters incluidas. Sin saturar.</span></div>
+      <div class="row"><span class="label">Vinculo</span><span class="value">Fortalecer la relacion con la red a traves de la Juntada DOU.</span></div>
+      <div class="row"><span class="label">Carrefour</span><span class="value">Anticipar el ingreso con mensaje proactivo y claro.</span></div>
+      <div class="row"><span class="label">Informar</span><span class="value">Newsletter semanal liviana con novedades reales de marca.</span></div>
+      <div class="row"><span class="label">Reactivar</span><span class="value">1 email mensual a dormidos, gestion comercial en manos del equipo de ventas.</span></div>
+    </div>
+
+    <div class="callout">
+      <strong>Fuera de alcance en esta etapa:</strong> sistema de puntos/niveles, flujos automaticos de onboarding/recompra/win-back, campana dedicada de POP (stock limitado — se integra en la newsletter, max 2 menciones/mes).
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ═══ SEGMENTACION ═══ -->
+  <div class="section" id="segmentacion">
+    <h2>Segmentacion</h2>
+    <p>Sin sistema de puntos, la segmentacion es una herramienta practica para decidir a quien le llega cada email. Cuatro ejes cruzables entre si.</p>
+
+    <div class="seg-grid">
+      <div class="seg-card">
+        <h4>Volumen de compra</h4>
+        <ul>
+          <li><strong>Alto volumen:</strong> pedidos recurrentes grandes</li>
+          <li><strong>Volumen medio:</strong> pedidos regulares, tamano estandar</li>
+          <li><strong>Bajo / esporadico:</strong> compras chicas o poco frecuentes</li>
+        </ul>
+      </div>
+      <div class="seg-card">
+        <h4>Recencia</h4>
+        <ul>
+          <li><strong>Activo:</strong> compro en los ultimos 30 dias</li>
+          <li><strong>Tibio:</strong> 30-60 dias sin comprar</li>
+          <li><strong>Dormido:</strong> 60+ dias sin comprar → win-back mensual</li>
+        </ul>
+      </div>
+      <div class="seg-card">
+        <h4>Region</h4>
+        <ul>
+          <li><strong>CABA y GBA</strong></li>
+          <li><strong>Interior Bs. As.</strong> (incluye O'Higgins)</li>
+          <li><strong>Otras provincias</strong></li>
+        </ul>
+      </div>
+      <div class="seg-card">
+        <h4>Mix de producto</h4>
+        <ul>
+          <li><strong>Mono-producto:</strong> solo una variedad</li>
+          <li><strong>Multi-producto / mix:</strong> varias variedades o caja mix</li>
+        </ul>
+      </div>
+    </div>
+    <p>Cada envio indica su segmento como combinacion de estos ejes. Alcanza con aplicar el filtro que corresponda a cada campana.</p>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ═══ CALENDARIO ═══ -->
+  <div class="section" id="calendario">
+    <h2>Calendario Maestro</h2>
+    <p>Todos los envios B2B consolidados, septiembre a diciembre 2026. Ninguna semana supera 3 emails.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Categoria</th>
+            <th>Email</th>
+            <th>Segmento</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Mie 17/9</td><td>Juntada</td><td>Invitacion a la Juntada</td><td>Activos + Tibios</td></tr>
+          <tr><td>Vie 19/9</td><td>Newsletter</td><td>Newsletter #1</td><td>Activos + Tibios</td></tr>
+          <tr><td>Mar 22/9</td><td>Promocion</td><td>Incentivo de volumen primavera</td><td>Toda la base</td></tr>
+          <tr><td>Vie 26/9</td><td>Newsletter</td><td>Newsletter #2</td><td>Activos + Tibios</td></tr>
+          <tr><td>Lun 29/9</td><td>Win-back</td><td>Win-back septiembre</td><td>Dormidos</td></tr>
+          <tr><td>Mie 1/10</td><td>Juntada</td><td>Recordatorio + push no confirmados</td><td>Activos + Tibios</td></tr>
+          <tr><td>Vie 3/10</td><td>Newsletter</td><td>Newsletter #3</td><td>Activos + Tibios</td></tr>
+          <tr><td>Mar 7/10</td><td>Snack — Teaser</td><td>Antes de la Juntada, una posta</td><td>Toda la base</td></tr>
+          <tr><td>Mie 8/10</td><td>Juntada</td><td>Recordatorio final + logistica</td><td>Confirmados</td></tr>
+          <tr class="event-row"><td>Sab 10/10</td><td>Evento</td><td>JUNTADA DOU en la fabrica</td><td>Asistentes</td></tr>
+          <tr><td>Lun 13/10</td><td>Juntada</td><td>Agradecimiento (2 versiones)</td><td>Asistentes / No asistentes</td></tr>
+          <tr><td>Mie 15/10</td><td>Juntada</td><td>Promo exclusiva asistentes [A CONFIRMAR]</td><td>Asistentes</td></tr>
+          <tr><td>Vie 17/10</td><td>Newsletter</td><td>Newsletter #4 (recap Juntada)</td><td>Activos + Tibios</td></tr>
+          <tr><td>Lun 20/10</td><td>Snack — Teaser</td><td>Lo que viste en la fabrica ya tiene nombre</td><td>Toda la base</td></tr>
+          <tr><td>Jue 23/10</td><td>Newsletter + Carrefour</td><td>Newsletter #5 (anuncio Carrefour)</td><td>Activos + Tibios</td></tr>
+          <tr><td>Mar 28/10</td><td>Snack — Teaser</td><td>Reveal nombre y sabor</td><td>Toda la base</td></tr>
+          <tr><td>Vie 31/10</td><td>Win-back</td><td>Win-back octubre</td><td>Dormidos</td></tr>
+          <tr><td>Mar 4/11</td><td>Snack — Preventa</td><td>Acceso anticipado socios top</td><td>Alto volumen</td></tr>
+          <tr><td>Vie 7/11</td><td>Snack — Preventa</td><td>Preventa abierta a toda la red</td><td>Resto de la red</td></tr>
+          <tr class="event-row"><td>Lun 10/11</td><td>Snack — Lanzamiento</td><td>LANZAMIENTO OFICIAL</td><td>Toda la base</td></tr>
+          <tr><td>Mie 12/11</td><td>Newsletter</td><td>Newsletter #6</td><td>Activos + Tibios</td></tr>
+          <tr><td>Jue 13/11</td><td>Snack</td><td>Guia de exhibicion</td><td>Toda la base</td></tr>
+          <tr><td>Vie 21/11</td><td>Snack — Sostenimiento</td><td>Primeros resultados</td><td>Toda la base</td></tr>
+          <tr><td>Mar 25/11</td><td>Promocion</td><td>Combo alfajor + snack</td><td>Toda la base</td></tr>
+          <tr><td>Vie 28/11</td><td>Win-back</td><td>Win-back noviembre</td><td>Dormidos</td></tr>
+          <tr><td>Jue 4/12</td><td>Snack — Sostenimiento</td><td>Push de reorden (variantes A/B)</td><td>Toda la base</td></tr>
+          <tr><td>Mar 9/12</td><td>Promocion</td><td>Stock para las fiestas</td><td>Toda la base</td></tr>
+          <tr><td>Mar 16/12</td><td>Promocion</td><td>Stock de verano (enero-febrero)</td><td>Toda la base</td></tr>
+          <tr><td>Mie 31/12</td><td>Win-back</td><td>Win-back diciembre</td><td>Dormidos</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout">
+      <strong>Newsletters de octubre en adelante:</strong> se programan semanalmente (viernes), pero el contenido se define 1-2 semanas antes de cada envio segun novedades reales del mes. No estan listadas individualmente en el calendario porque su contenido es variable.
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ═══ FRECUENCIA ═══ -->
+  <div class="section" id="frecuencia">
+    <h2>Reglas de Frecuencia</h2>
+    <p><strong>Regla base:</strong> ningun distribuidor recibe mas de 3 emails por semana (lunes a domingo), contando todo junto.</p>
+
+    <h3>Orden de prioridad ante colision</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Prioridad</th><th>Tipo</th><th>Regla</th></tr>
+        </thead>
+        <tbody>
+          <tr><td style="font-weight:700;text-align:center;">1</td><td>Comunicacion operativa con fecha fija</td><td>Juntada, dia de lanzamiento del snack. Nunca se mueven.</td></tr>
+          <tr><td style="font-weight:700;text-align:center;">2</td><td>Newsletter semanal</td><td>Columna vertebral del contacto. No se elimina, puede recortarse.</td></tr>
+          <tr><td style="font-weight:700;text-align:center;">3</td><td>Campana activa en curso</td><td>Teaser, preventa, lanzamiento del snack. Prioridad sobre promos nuevas.</td></tr>
+          <tr><td style="font-weight:700;text-align:center;">4</td><td>Promociones comerciales</td><td>Primeras en moverse. Postergar a la semana siguiente, no cancelar.</td></tr>
+          <tr><td style="font-weight:700;text-align:center;">5</td><td>Win-back</td><td>Flexibilidad de ±1 semana dentro del mismo mes.</td></tr>
+          <tr><td style="font-weight:700;text-align:center;">6</td><td>Material POP</td><td>Integrado en newsletter, max 2 veces/mes. Primero que se recorta.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ═══ JUNTADA ═══ -->
+  <div class="section" id="juntada">
+    <h2>Juntada DOU <span class="badge badge-event">Evento 10/10</span></h2>
+    <div class="flow-header">
+      <div class="row"><span class="label">Evento</span><span class="value">Sabado 10 de octubre 2026, fabrica DOU en O'Higgins</span></div>
+      <div class="row"><span class="label">Formato</span><span class="value">Invitacion familiar — socio + familia, comida, recorrida por fabrica</span></div>
+      <div class="row"><span class="label">Segmento</span><span class="value">Activos + Tibios (se excluye Dormidos)</span></div>
+      <div class="row"><span class="label">Secuencia</span><span class="value">4 emails + 1 promo post-evento [A CONFIRMAR]</span></div>
+    </div>
+
+    <div class="callout-warn callout">
+      <strong>Placeholders a completar:</strong> [LINK RSVP], [LINK GOOGLE MAPS], [NUMERO WHATSAPP], [DIRECCION EXACTA PLANTA], [HORARIO]
+    </div>
+
+    <details class="email-card" open>
+      <summary><span class="badge badge-accent">17/9</span> Email 1 — Invitacion</summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Te invitamos a la Juntada DOU — sabado 10/10 en la fabrica</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">Una tarde a puro alfajor en O'Higgins. Trae a tu familia.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Hola [Nombre],</p>
+          <p>Queremos invitarte a la primera Juntada DOU: un encuentro para conocer la fabrica, compartir una tarde con el equipo y agradecerte en persona por ser parte de la marca desde el dia uno.</p>
+          <p>Va a ser el <strong>sabado 10 de octubre</strong>, en nuestra planta de O'Higgins. La idea es simple: que conozcas de cerca donde se hace cada alfajor que vendes, y que vengas acompanado de tu familia. Esto no es solo una reunion de negocios: es una juntada de verdad.</p>
+          <p>En los proximos dias te vamos a compartir todos los detalles de horario y logistica. Por ahora, necesitamos que nos confirmes tu presencia y la cantidad de personas que te van a acompanar, para organizar todo como corresponde.</p>
+          <p>Contamos con vos. Sos parte de esto.</p>
+          <p>Equipo DOU Foods</p>
+          <p><span class="email-cta">Confirmar mi asistencia</span></p>
+        </div>
+        <div class="email-notes">RSVP: nombre, distribuidora, cantidad de acompanantes, region/localidad. Campo opcional de restricciones alimentarias.</div>
+      </div>
+    </details>
+
+    <details class="email-card">
+      <summary><span class="badge badge-accent">1/10</span> Email 2 — Recordatorio + push a no confirmados</summary>
+      <div class="email-body">
+        <div class="email-field">Asunto (no confirmados)</div>
+        <div class="email-subject">Vas a venir a la Juntada DOU? Todavia estas a tiempo</div>
+        <div class="email-field">Asunto (confirmados)</div>
+        <div class="email-subject">Faltan 9 dias para la Juntada DOU — asi va a ser el encuentro</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">Fecha, horario y primeros detalles de logistica para el 10/10.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Hola [Nombre],</p>
+          <p>La Juntada DOU se acerca: el <strong>sabado 10 de octubre</strong> te esperamos en nuestra planta de O'Higgins para pasar la tarde juntos, conocer la fabrica y compartir un rato en familia.</p>
+          <p>Asi va a ser la organizacion:</p>
+          <p>- <strong>Cuando:</strong> sabado 10/10, desde las [HORARIO].<br>
+          - <strong>Donde:</strong> Planta DOU, [DIRECCION EXACTA], O'Higgins, Buenos Aires.<br>
+          - <strong>Que incluye:</strong> recorrida por la fabrica, un momento para compartir con el equipo y una merienda para toda la familia.</p>
+          <p><em>Si todavia no confirmaste:</em> nos encantaria contar con vos. Confirma tu presencia y la de tu familia antes del <strong>martes 6/10</strong>.</p>
+          <p><em>Si ya confirmaste:</em> ya te estamos esperando! En los proximos dias te enviamos la ubicacion exacta en Google Maps y un contacto de WhatsApp por si necesitas algo el mismo dia.</p>
+          <p>Nos vemos en la fabrica.</p>
+          <p>Equipo DOU Foods</p>
+          <p><span class="email-cta">Confirmar mi asistencia</span></p>
+        </div>
+        <div class="email-notes">Segmentar en dos variantes (confirmados / no confirmados) usando estado de RSVP. Si la plataforma no permite logica condicional, armar dos audiencias.</div>
+      </div>
+    </details>
+
+    <details class="email-card">
+      <summary><span class="badge badge-accent">8/10</span> Email 3 — Recordatorio final + logistica</summary>
+      <div class="email-body">
+        <div class="email-field">Segmento</div>
+        <div class="email-preview">Solo confirmados</div>
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Ultimos detalles: te esperamos este sabado en la fabrica</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">Direccion, mapa y contacto directo para el dia de la Juntada.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Hola [Nombre],</p>
+          <p>Ya casi llega el dia! Este <strong>sabado 10 de octubre</strong> te esperamos a vos y a tu familia en la planta DOU de O'Higgins. Estos son los datos finales para que llegues sin vueltas:</p>
+          <p>- <strong>Direccion:</strong> [DIRECCION EXACTA PLANTA]<br>
+          - <strong>Como llegar:</strong> [LINK GOOGLE MAPS]<br>
+          - <strong>Horario de encuentro:</strong> [HORARIO]<br>
+          - <strong>Contacto para el dia:</strong> WhatsApp [NUMERO WHATSAPP]</p>
+          <p>Te recomendamos llegar con unos minutos de anticipacion para el registro en la entrada. El resto, dejalo en nuestras manos: solo trae ganas de pasarla bien.</p>
+          <p>Nos vemos el sabado!</p>
+          <p>Equipo DOU Foods</p>
+          <p><span class="email-cta">Ver ubicacion en Google Maps</span></p>
+        </div>
+        <div class="email-notes">Confirmar que el WhatsApp este monitoreado activamente el viernes 9/10 y el sabado 10/10.</div>
+      </div>
+    </details>
+
+    <details class="email-card">
+      <summary><span class="badge badge-accent">13/10</span> Email 4 — Agradecimiento (2 versiones)</summary>
+      <div class="email-body">
+        <div class="email-field">Version A — Asistentes</div>
+        <div class="email-subject">Gracias por estar en la Juntada DOU</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Hola [Nombre],</p>
+          <p>Gracias por haber venido a la Juntada DOU con tu familia. Para nosotros significo mucho compartir la fabrica, mostrarte como se hace cada alfajor y pasar una tarde distinta, mas alla de lo comercial.</p>
+          <p>Sos parte fundamental de que la marca llegue a cada barrio, y encuentros como este son nuestra forma de decirtelo en persona.</p>
+          <p>[ESPACIO PARA FOTO GRUPAL DEL EVENTO]</p>
+          <p>Esperamos que te hayas llevado tantas ganas como nosotros de que se repita.</p>
+          <p>Gracias por ser parte de la familia DOU!</p>
+          <p>Equipo DOU Foods</p>
+        </div>
+
+        <div class="email-field" style="margin-top:20px;">Version B — No asistentes</div>
+        <div class="email-subject">Te extranamos en la Juntada DOU</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Hola [Nombre],</p>
+          <p>El sabado tuvimos la Juntada DOU en nuestra planta de O'Higgins, y te extranamos. Sabemos que no siempre los tiempos acompanan, y lo entendemos.</p>
+          <p>Este fue el primero de varios encuentros que queremos tener con la familia DOU, asi que va a haber mas oportunidades de conocernos en persona.</p>
+          <p>Gracias por seguir siendo parte de la marca todos los dias, desde tu local.</p>
+          <p>Nos vemos en la proxima.</p>
+          <p>Equipo DOU Foods</p>
+        </div>
+        <div class="email-notes">No incluir fotos del evento en la version B. Tono breve, empatico, sin reclamo.</div>
+      </div>
+    </details>
+
+    <details class="email-card">
+      <summary><span class="badge badge-confirm">15/10</span> Email 5 — Promo para asistentes [A CONFIRMAR]</summary>
+      <div class="email-body">
+        <div class="email-field">Segmento</div>
+        <div class="email-preview">Solo asistentes confirmados y presentes en la Juntada</div>
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Un beneficio especial por haber estado en la Juntada [A CONFIRMAR]</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Hola [Nombre],</p>
+          <p>Todavia tenemos fresco el recuerdo de la Juntada del sabado, y queremos que el agradecimiento no quede solo en palabras.</p>
+          <p>[A CONFIRMAR — DESCRIPCION DE LA PROMOCION: descuento en el proximo pedido, unidades bonificadas, acceso anticipado, etc.]</p>
+          <p>Esta propuesta es exclusiva para quienes nos acompanaron en la fabrica, como una forma de decir gracias por el tiempo que le dedicaron a estar ahi con nosotros.</p>
+          <p>[A CONFIRMAR — CONDICIONES: vigencia, como se aplica, contacto comercial]</p>
+          <p>Gracias otra vez por ser parte.</p>
+          <p>Equipo DOU Foods</p>
+          <p><span class="email-cta">[A CONFIRMAR]</span></p>
+        </div>
+        <div class="email-notes">Toda la oferta comercial esta pendiente de definicion. La estructura de copy queda armada para que solo haya que completar los corchetes.</div>
+      </div>
+    </details>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ═══ NEWSLETTER ═══ -->
+  <div class="section" id="newsletter">
+    <h2>Newsletter Semanal</h2>
+    <div class="flow-header">
+      <div class="row"><span class="label">Cadencia</span><span class="value">1 por semana, viernes</span></div>
+      <div class="row"><span class="label">Segmento</span><span class="value">Activos + Tibios, todas las regiones</span></div>
+      <div class="row"><span class="label">POP</span><span class="value">Integrado dentro de la newsletter, maximo 2 menciones por mes</span></div>
+      <div class="row"><span class="label">Detalle</span><span class="value">Solo septiembre (2 ediciones). Octubre en adelante: contenido segun novedades.</span></div>
+    </div>
+
+    <h3>Septiembre 2026 (copy completo)</h3>
+
+    <details class="email-card" open>
+      <summary><span class="badge badge-accent">19/9</span> Newsletter #1</summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Novedades DOU: asi viene septiembre</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">Juntada DOU, material para tu local y lo que se viene en la marca.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Hola [Nombre],</p>
+          <p>Arrancamos un espacio semanal para contarte de primera mano las novedades de DOU: que esta pasando en la fabrica, que se viene en la marca y como podemos ayudarte a vender mejor en tu local.</p>
+          <p><strong>Juntada DOU — sabado 10/10.</strong> Ya te escribimos por separado con la invitacion formal, pero te lo repetimos aca: te esperamos en la fabrica de O'Higgins con tu familia. Si todavia no confirmaste, hacelo cuanto antes.</p>
+          <p><strong>Material POP disponible (stock limitado).</strong> Tenemos una cantidad acotada de exhibidores y carteleria para punto de venta. Si todavia no tenes el tuyo, escribile a tu contacto comercial para reservarlo: se entrega por orden de pedido mientras dure el stock.</p>
+          <p>Cualquier consulta sobre pedidos o entregas, tu contacto comercial de siempre esta para ayudarte.</p>
+          <p>Nos vemos pronto!</p>
+          <p>Equipo DOU Foods</p>
+          <p><span class="email-cta">Confirmar asistencia a la Juntada</span></p>
+        </div>
+        <div class="email-notes">Primera mencion de POP del mes (1 de 2).</div>
+      </div>
+    </details>
+
+    <details class="email-card">
+      <summary><span class="badge badge-accent">26/9</span> Newsletter #2</summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Se viene la Juntada DOU y algo mas para noviembre</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">Contamos como va la organizacion del evento y un pequeno adelanto.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Hola [Nombre],</p>
+          <p>Faltan pocos dias para que cierre el plazo de confirmacion de la Juntada DOU (10/10 en O'Higgins) — si sos de los que todavia no respondio, todavia estas a tiempo de sumarte con tu familia.</p>
+          <p>Mientras tanto, en la fabrica ya estamos trabajando en algo nuevo que vas a conocer en noviembre: un producto pensado para no bajar el ritmo en tu local cuando el calor le empieza a jugar en contra al alfajor. Todavia no podemos contarte mas, pero vas a ser de los primeros en enterarte.</p>
+          <p>Como todos los meses, seguimos con stock limitado de material POP para exhibicion — si te interesa y todavia no lo pediste, consultale a tu contacto comercial por disponibilidad.</p>
+          <p>Nos vemos en la fabrica el 10.</p>
+          <p>Equipo DOU Foods</p>
+          <p><span class="email-cta">Confirmar asistencia a la Juntada</span></p>
+        </div>
+        <div class="email-notes">Segunda mencion POP del mes (2 de 2). Teaser generico del snack — coordinar con la campana de lanzamiento.</div>
+      </div>
+    </details>
+
+    <h3>Octubre en adelante (fechas + tema general)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Fecha</th><th>Tema general (contenido a definir)</th></tr></thead>
+        <tbody>
+          <tr><td>Vie 3/10</td><td>Recta final hacia la Juntada / novedades de producto</td></tr>
+          <tr><td>Vie 17/10</td><td>Recap de la Juntada con fotos del encuentro</td></tr>
+          <tr><td>Jue 23/10</td><td><strong>Anuncio Carrefour</strong> (ver seccion Carrefour para copy completo)</td></tr>
+          <tr><td>Vie 31/10</td><td>Teaser mas concreto del snack</td></tr>
+          <tr><td>Nov (4 ediciones)</td><td>Lanzamiento del snack y contenido asociado</td></tr>
+          <tr><td>Dic (4 ediciones)</td><td>Cierre de ano, balance, agenda verano</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ═══ CARREFOUR ═══ -->
+  <div class="section" id="carrefour">
+    <h2>Comunicacion Carrefour</h2>
+    <p>Anunciar el ingreso a Carrefour de forma proactiva, antes de que el socio se entere por otro lado. Mensaje central: <strong>"estas vendiendo una marca que ya esta en las grandes cadenas, y la conseguis mas cerca y mas rapido."</strong></p>
+
+    <div class="flow-header">
+      <div class="row"><span class="label">Formato</span><span class="value">Email dedicado o nota principal de la newsletter del 23/10</span></div>
+      <div class="row"><span class="label">Segmento</span><span class="value">Toda la base Activa + Tibia</span></div>
+      <div class="row"><span class="label">Timing</span><span class="value">Apenas el acuerdo este confirmado, antes del ingreso a gondola</span></div>
+    </div>
+
+    <details class="email-card" open>
+      <summary><span class="badge badge-accent">~23/10</span> Anuncio Carrefour</summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Una noticia que queremos que sepas antes que nadie</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">DOU entra a Carrefour. Y eso tambien es bueno para tu local.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Hola [Nombre],</p>
+          <p>Te escribimos para contarte algo importante antes de que lo veas en otro lado: <strong>DOU va a empezar a venderse en Carrefour.</strong></p>
+          <p>Sabemos que una noticia asi puede generar una pregunta logica: "esto me complica a mi?". Queremos ser directos: no. Todo lo contrario.</p>
+          <p>Que DOU este en una cadena grande no compite con tu local, lo respalda. Significa que estas vendiendo una marca que cada vez mas gente reconoce y busca, una marca que ya esta en las gondolas mas grandes del pais — y que en tu local la consiguen <strong>mas cerca y mas rapido</strong>, sin hacer una compra grande ni esperar en una fila.</p>
+          <p>Vos seguis siendo, para tus clientes de siempre, el lugar de confianza donde encuentran DOU al toque. Eso no lo reemplaza ninguna cadena.</p>
+          <p>Este paso es parte de que la marca siga creciendo, y ese crecimiento — mas inversion en producto, en comunicacion, en la marca que la gente reconoce cuando la ve en tu vidriera — tambien te beneficia a vos.</p>
+          <p>Cualquier duda que tengas sobre esto, tu contacto comercial de siempre esta para conversarlo con vos.</p>
+          <p>Gracias por ser parte de DOU desde el primer dia.</p>
+          <p>Equipo DOU Foods</p>
+          <p><span class="email-cta">Hablar con mi contacto comercial</span></p>
+        </div>
+        <div class="email-notes">El equipo comercial debe recibir este copy antes del envio masivo, con respuestas preparadas (precio en Carrefour vs. canal tradicional, exclusividad de sabores). Aviso previo por WhatsApp/llamada a cuentas de mayor volumen antes de que salga el email.</div>
+      </div>
+    </details>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ═══ SNACK ═══ -->
+  <div class="section" id="snack">
+    <h2>Lanzamiento Snack DOU</h2>
+    <div class="flow-header">
+      <div class="row"><span class="label">Producto</span><span class="value">Snack DOU [CONFIRMAR NOMBRE] — snack no estacional para cubrir la baja de verano</span></div>
+      <div class="row"><span class="label">Lanzamiento</span><span class="value">9-10 de noviembre 2026</span></div>
+      <div class="row"><span class="label">Estructura</span><span class="value">Teaser (oct) → Preventa (nov) → Lanzamiento → Sostenimiento</span></div>
+      <div class="row"><span class="label">Acceso preventa</span><span class="value">Por relacion comercial real (volumen + recurrencia), no por puntos</span></div>
+    </div>
+
+    <div class="callout-warn callout">
+      <strong>Placeholders [CONFIRMAR]:</strong> nombre del producto, sabor/variante, formato/gramaje, precio, packs por caja. Cerrar con el equipo comercial antes de programar.
+    </div>
+
+    <!-- FASE 1 -->
+    <div class="phase-label">Fase 1 — Teaser (octubre)</div>
+
+    <details class="email-card">
+      <summary><span class="badge badge-phase">7/10</span> Teaser #1 — Antes de la Juntada, una posta</summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Antes de la Juntada, una posta</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">Todavia no podemos decir que es. Pero se viene.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Hola, [Nombre].</p>
+          <p>Te escribimos antes de la Juntada del sabado porque queremos que llegues con un dato que todavia no es publico.</p>
+          <p>En la fabrica de O'Higgins esta pasando algo que no tiene que ver con el alfajor de siempre. Lleva semanas en desarrollo, ya paso por pruebas de sabor y de packaging, y en los proximos dias vas a empezar a ver senales.</p>
+          <p>No es un lanzamiento mas. Es la respuesta a algo que muchos de ustedes nos vienen planteando hace tiempo: que pedir cuando el alfajor se cae en verano.</p>
+          <p>Todavia no podemos contarte de que se trata. Pero si vas a estar en la Juntada del sabado 10, presta atencion — vas a ser de los primeros en verlo de cerca.</p>
+          <p>Nos vemos en la fabrica.</p>
+          <p>El equipo DOU</p>
+          <p><span class="email-cta">Confirma tu lugar en la Juntada</span></p>
+        </div>
+      </div>
+    </details>
+
+    <details class="email-card">
+      <summary><span class="badge badge-phase">20/10</span> Teaser #2 — Reveal de categoria</summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Lo que viste en la fabrica ya tiene nombre</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">Bueno, casi. Todavia nos falta una semana para contarte todo.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Hola, [Nombre].</p>
+          <p>El sabado pasado, en la Juntada, varios socios vieron de cerca algo que veniamos cocinando hace meses. Para los que no pudieron venir: no es un alfajor nuevo. Es una categoria nueva para DOU.</p>
+          <p>Se trata de un snack — pensado para ocupar el espacio que el alfajor deja libre en verano. Mismo packaging premium, misma logica de producto que ya conoces, pero en un formato que no depende del frio para venderse.</p>
+          <p>La idea es simple: que tu gondola o tu mostrador tengan algo de DOU los doce meses del ano, no solo de marzo a octubre.</p>
+          <p>Todavia nos guardamos el nombre y el sabor. Eso lo contamos la semana que viene. Lo que si te podemos adelantar es la fecha: llega a mediados de noviembre.</p>
+          <p>Seguimos en contacto.</p>
+          <p>El equipo DOU</p>
+          <p><span class="email-cta">Quiero enterarme primero</span></p>
+        </div>
+      </div>
+    </details>
+
+    <details class="email-card">
+      <summary><span class="badge badge-phase">28/10</span> Teaser #3 — Reveal nombre y sabor</summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Te presentamos [NOMBRE DEL SNACK] [CONFIRMAR]</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">El snack que va a sostener tu pedido en verano ya tiene nombre, sabor y fecha.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Hola, [Nombre].</p>
+          <p>Llego el momento de contarte todo.</p>
+          <p>Se llama <strong>[NOMBRE DEL SNACK — CONFIRMAR]</strong>, viene en [sabor/variante — CONFIRMAR] y mantiene el mismo estandar que ya conoces en el alfajor: produccion en nuestra fabrica de O'Higgins, ingredientes premium, packaging que se banca el mostrador de cualquier kiosco o dietetica.</p>
+          <p>Es un producto pensado especificamente para el semestre en que el alfajor pierde fuerza. No reemplaza a NOM, XD ni NT — los complementa, para que nunca te quedes sin motivo para pedirle a DOU.</p>
+          <p>Fecha de lanzamiento: <strong>9 y 10 de noviembre.</strong></p>
+          <p>Antes de esa fecha, va a haber una preventa exclusiva para los socios con mas trayectoria e historial de pedidos con nosotros. Si estas en ese grupo, te va a llegar la invitacion en los proximos dias. Si no, tranquilo — vas a poder sumarte antes del lanzamiento oficial.</p>
+          <p>Cualquier duda, responde este mail directamente.</p>
+          <p>El equipo DOU</p>
+          <p><span class="email-cta">Ver ficha de producto</span></p>
+        </div>
+      </div>
+    </details>
+
+    <!-- FASE 2 -->
+    <div class="phase-label">Fase 2 — Preventa (noviembre)</div>
+
+    <details class="email-card">
+      <summary><span class="badge badge-phase">4/11</span> Preventa exclusiva — Socios top</summary>
+      <div class="email-body">
+        <div class="email-field">Segmento</div>
+        <div class="email-preview">Distribuidores de alto volumen y alta recurrencia</div>
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Acceso anticipado a [NOMBRE DEL SNACK]</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">Por tu historial con DOU, entras primero. Antes que el resto de la red.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Hola, [Nombre].</p>
+          <p>Por tu volumen de pedidos y tu trayectoria como socio DOU, te damos acceso a la preventa de [NOMBRE DEL SNACK] antes que al resto de la red.</p>
+          <p>Esto no es un sorteo ni un sistema de puntos — es simple: los socios que mas sostienen el negocio con nosotros son los primeros en tener el producto nuevo en sus manos, y los primeros en tenerlo en la gondola cuando arranque el lanzamiento oficial el 9 y 10 de noviembre.</p>
+          <p>Durante esta semana podes reservar tu pedido de preventa a [precio/condicion especial — CONFIRMAR]. La preventa general se abre para el resto de la red el [fecha], asi que tenes unos dias de ventaja para asegurarte el stock que necesitas para arrancar fuerte.</p>
+          <p>Cualquier consulta sobre cantidades o condiciones, escribinos directamente a [contacto comercial].</p>
+          <p>Gracias por ser parte del nucleo duro de DOU.</p>
+          <p>El equipo DOU</p>
+          <p><span class="email-cta">Reservar en preventa</span></p>
+        </div>
+      </div>
+    </details>
+
+    <details class="email-card">
+      <summary><span class="badge badge-phase">7/11</span> Preventa abierta — Toda la red</summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Ya podes sumar [NOMBRE DEL SNACK] a tu proximo pedido</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">La preventa esta abierta para toda la red. Se lanza oficialmente el 9 y 10 de noviembre.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Hola, [Nombre].</p>
+          <p>Como te contamos hace unos dias, [NOMBRE DEL SNACK] llega el 9 y 10 de noviembre. A partir de hoy, la preventa esta abierta para toda la red de socios DOU.</p>
+          <p>Sumarlo a tu proximo pedido es simple: hablalo con tu contacto comercial habitual o responde este mail y coordinamos cantidades.</p>
+          <p>Algunas cosas para tener en cuenta antes del lanzamiento:</p>
+          <p>- Formato: [CONFIRMAR]<br>
+          - Precio y unidades por caja: [CONFIRMAR]<br>
+          - Recomendacion de arranque: pedir un mix inicial para probar rotacion antes del pico de verano.</p>
+          <p>El objetivo es que llegues al lanzamiento con stock en el local, no corriendo detras de la demanda.</p>
+          <p>Te esperamos del otro lado del mostrador.</p>
+          <p>El equipo DOU</p>
+          <p><span class="email-cta">Coordinar mi pedido de preventa</span></p>
+        </div>
+      </div>
+    </details>
+
+    <!-- FASE 3 -->
+    <div class="phase-label">Fase 3 — Lanzamiento (noviembre)</div>
+
+    <details class="email-card">
+      <summary><span class="badge badge-event">10/11</span> Lanzamiento oficial</summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">[NOMBRE DEL SNACK] ya esta disponible</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">Hoy arranca oficialmente. Asi es como te conviene exhibirlo.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Hola, [Nombre].</p>
+          <p>Hoy es el dia. [NOMBRE DEL SNACK] esta oficialmente disponible para pedidos y despacho.</p>
+          <p>Despues de meses de desarrollo y de la preventa de las ultimas semanas, el producto que va a acompanarte en el semestre en que el alfajor afloja ya es una realidad.</p>
+          <p>Si reservaste en la preventa, tu pedido ya esta en proceso — te va a llegar la confirmacion de despacho por separado. Si todavia no pediste, es un buen momento para sumarlo antes de que arranque diciembre, uno de los meses mas fuertes en consumo de snacks.</p>
+          <p>En los proximos dias te compartimos recomendaciones concretas de exhibicion para que le saques el maximo provecho en el mostrador.</p>
+          <p>Gracias por acompanar a DOU en cada etapa — de la fabrica en O'Higgins hasta tu local.</p>
+          <p>El equipo DOU</p>
+          <p><span class="email-cta">Pedir [NOMBRE DEL SNACK] ahora</span></p>
+        </div>
+      </div>
+    </details>
+
+    <details class="email-card">
+      <summary><span class="badge badge-phase">13/11</span> Guia de exhibicion</summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Como exhibir [NOMBRE DEL SNACK] para que se venda solo</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">Tres minutos de lectura, resultado directo en el mostrador.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Hola, [Nombre].</p>
+          <p>Ahora que [NOMBRE DEL SNACK] ya esta en tu local (o en camino), te dejamos algunas recomendaciones simples para que arranque con buena rotacion desde el primer dia:</p>
+          <p>- <strong>Ubicacion:</strong> cerca de la zona de impulso de caja, igual que funciona bien con los alfajores.<br>
+          - <strong>Combinacion:</strong> exhibirlo junto a NOM, XD o NT ayuda a que el cliente identifique que es de la misma familia DOU.<br>
+          - <strong>Cartel de mostrador:</strong> si pediste el material POP en la ultima newsletter, es el momento de usarlo. Si no lo tenes, contanos y vemos como hacertelo llegar.<br>
+          - <strong>Primeras semanas:</strong> no lo escondas en el deposito esperando "el momento ideal" — la mejor forma de generar rotacion es que este visible desde el dia uno.</p>
+          <p>Cualquier duda sobre exhibicion o reposicion, tu contacto comercial esta para ayudarte.</p>
+          <p>El equipo DOU</p>
+          <p><span class="email-cta">Ver guia de exhibicion completa</span></p>
+        </div>
+      </div>
+    </details>
+
+    <!-- FASE 4 -->
+    <div class="phase-label">Fase 4 — Sostenimiento (noviembre-diciembre)</div>
+
+    <details class="email-card">
+      <summary><span class="badge badge-phase">21/11</span> Primeros resultados</summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Los primeros resultados de [NOMBRE DEL SNACK]</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">Diez dias de lanzamiento, primeras devoluciones de socios que ya lo tienen.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Hola, [Nombre].</p>
+          <p>Van diez dias desde el lanzamiento de [NOMBRE DEL SNACK] y ya podemos compartir algo lindo: varios socios que lo sumaron en la preventa nos cuentan que la rotacion en el mostrador viene mejor de lo esperado, y algunos ya nos pidieron reposicion.</p>
+          <p>Si todavia no lo probaste en tu local, esta primera respuesta del mercado es una buena senal para sumarlo a tu proximo pedido — sobre todo pensando en diciembre, cuando el consumo de snacks suele acelerar por las fiestas.</p>
+          <p>Si ya lo tenes y te esta funcionando, contanos como viene la rotacion. Nos sirve para seguir ajustando produccion y para compartir esas experiencias con el resto de la red.</p>
+          <p>El equipo DOU</p>
+          <p><span class="email-cta">Sumar o reponer [NOMBRE DEL SNACK]</span></p>
+        </div>
+      </div>
+    </details>
+
+    <details class="email-card">
+      <summary><span class="badge badge-phase">4/12</span> Push de reorden (2 variantes)</summary>
+      <div class="email-body">
+        <div class="email-field">Variante A — Ya pidieron el snack</div>
+        <div class="email-subject">Antes de que arranque la temporada fuerte, revisa tu stock</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Hola, [Nombre].</p>
+          <p>Ya tenes [NOMBRE DEL SNACK] funcionando en tu local, asi que vamos directo al grano: diciembre y enero suelen ser meses fuertes para consumo de snacks, y es el momento en que el alfajor empieza a bajar el ritmo.</p>
+          <p>Te recomendamos revisar tu stock actual y pensar el pedido de fin de ano con anticipacion, para no quedarte corto en pleno pico de demanda.</p>
+          <p>Si queres, coordinamos con tu contacto comercial un pedido combinado de snack + alfajor pensado para las proximas semanas.</p>
+          <p>El equipo DOU</p>
+          <p><span class="email-cta">Armar mi pedido de diciembre</span></p>
+        </div>
+
+        <div class="email-field" style="margin-top:20px;">Variante B — Todavia no pidieron el snack</div>
+        <div class="email-subject">Todavia estas a tiempo de sumar el snack antes de las fiestas</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Hola, [Nombre].</p>
+          <p>Vimos que todavia no sumaste [NOMBRE DEL SNACK] a tu pedido. Te lo mencionamos de nuevo porque diciembre es exactamente el momento en que tiene mas sentido: el consumo de snacks se acelera con las fiestas, justo cuando el alfajor empieza a perder traccion por el calor.</p>
+          <p>Es una buena oportunidad para probarlo con un pedido chico y ver como responde tu clientela, sin necesidad de comprometerte con un volumen grande desde el arranque.</p>
+          <p>Cualquier duda sobre precio o unidades minimas, tu contacto comercial te puede ayudar.</p>
+          <p>El equipo DOU</p>
+          <p><span class="email-cta">Quiero sumarlo a mi pedido</span></p>
+        </div>
+        <div class="email-notes">Segmentar por historial de compra (quien compro en preventa/lanzamiento vs. quien no). Si no es posible, enviar Variante B a toda la base.</div>
+      </div>
+    </details>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ═══ PROMOS ═══ -->
+  <div class="section" id="promos">
+    <h2>Promociones</h2>
+    <p>Cuatro campanas puntuales para los momentos comerciales clave. Incentivos de volumen o combos directos, sin puntos ni niveles. La promo de asistentes a la Juntada esta en la seccion Juntada.</p>
+
+    <details class="email-card">
+      <summary><span class="badge badge-accent">22/9</span> Incentivo de volumen — Primavera</summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Septiembre es tu ultima ventana fuerte antes del verano</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">Suma volumen ahora — el alfajor todavia tiene calle antes de que baje la temporada.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Hola, [Nombre].</p>
+          <p>Septiembre y las primeras semanas de octubre son, historicamente, uno de los mejores momentos del ano para el alfajor DOU — todavia hace frio suficiente para que NOM, XD y NT se muevan a pleno, antes de que el calor empiece a jugar en contra.</p>
+          <p>Por eso armamos una condicion especial para pedidos de volumen durante este mes: [CONFIRMAR CONDICION — ej. descuento por cantidad de cajas, unidad bonificada, o mejora en condiciones de pago].</p>
+          <p>Es el momento de stockearte fuerte, antes de que la curva empiece a bajar con el calor.</p>
+          <p>Cualquier consulta sobre cantidades, habla con tu contacto comercial.</p>
+          <p>El equipo DOU</p>
+          <p><span class="email-cta">Quiero aprovechar la condicion de septiembre</span></p>
+        </div>
+      </div>
+    </details>
+
+    <details class="email-card">
+      <summary><span class="badge badge-accent">25/11</span> Combo alfajor + snack</summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Alfajor + snack, un combo pensado para no parar de vender</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">Uno cubre el frio, el otro cubre el calor. Juntos, cubren el ano.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Hola, [Nombre].</p>
+          <p>Ahora que [NOMBRE DEL SNACK] ya esta en la calle, armamos un combo pensado para que tu local tenga cobertura DOU durante todo el ano: una combinacion de alfajores (NOM, XD, NT) y [NOMBRE DEL SNACK] con una condicion especial de pedido conjunto.</p>
+          <p>La logica es simple: mientras el alfajor todavia tiene buena rotacion en noviembre, el snack empieza a ganar terreno de cara al verano. Pedir los dos juntos ahora te deja mejor parado para la transicion de temporada, sin depender de un solo producto.</p>
+          <p>Condicion del combo: [CONFIRMAR — ej. descuento por pedido mixto, packs armados, unidades bonificadas].</p>
+          <p>Coordinalo con tu contacto comercial cuando quieras.</p>
+          <p>El equipo DOU</p>
+          <p><span class="email-cta">Armar mi combo alfajor + snack</span></p>
+        </div>
+      </div>
+    </details>
+
+    <details class="email-card">
+      <summary><span class="badge badge-accent">9/12</span> Stock para las fiestas</summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Stockeate para las fiestas</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">Diciembre no espera. Asegurate el pedido antes de que se agote.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Hola, [Nombre].</p>
+          <p>Diciembre es uno de los meses de mayor movimiento del ano — regalos de fin de ano, cajas para oficinas, consumo de fiestas. Es buen momento para asegurar stock de DOU antes de que la demanda se acelere y algunos formatos empiecen a escasear.</p>
+          <p>Armamos una condicion especial para pedidos de fin de ano, pensada tanto para reposicion de alfajores como para el mix con snack: [CONFIRMAR CONDICION].</p>
+          <p>Si vendes cajas o packs para regalo empresarial, la Box Mix DOU suele funcionar muy bien en este momento del ano — es una buena oportunidad para destacarla en tu mostrador.</p>
+          <p>Cualquier consulta, tu contacto comercial esta para ayudarte a armar el pedido.</p>
+          <p>El equipo DOU</p>
+          <p><span class="email-cta">Armar mi pedido de fin de ano</span></p>
+        </div>
+      </div>
+    </details>
+
+    <details class="email-card">
+      <summary><span class="badge badge-accent">16/12</span> Stock de verano</summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Pensa tu stock de enero y febrero ahora</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">El alfajor va a bajar. El snack esta para sostener el pedido.</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Hola, [Nombre].</p>
+          <p>Ya lo venimos hablando desde octubre: cuando llegue el calor fuerte de enero y febrero, el alfajor va a perder traccion, como pasa todos los anos. La diferencia esta vez es que tenes [NOMBRE DEL SNACK] para sostener el pedido durante esos meses.</p>
+          <p>Te proponemos aprovechar diciembre para armar un pedido de stock pensado para el verano, con foco en snack y una porcion mas chica de alfajor, en lugar de esperar a que la caida ya este encima.</p>
+          <p>Condicion para pedidos de stock de verano: [CONFIRMAR].</p>
+          <p>Planificar ahora te ahorra el bache de enero.</p>
+          <p>El equipo DOU</p>
+          <p><span class="email-cta">Armar mi stock de verano</span></p>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ═══ WINBACK ═══ -->
+  <div class="section" id="winback">
+    <h2>Win-back Mensual</h2>
+    <div class="flow-header">
+      <div class="row"><span class="label">Frecuencia</span><span class="value">1 envio manual por mes (no automatizado)</span></div>
+      <div class="row"><span class="label">Segmento</span><span class="value">Dormidos (60+ dias sin comprar)</span></div>
+      <div class="row"><span class="label">Dia sugerido</span><span class="value">Primer jueves habil del mes, para no competir con otras campanas</span></div>
+    </div>
+
+    <details class="email-card" open>
+      <summary><span class="badge badge-accent">Mensual</span> Plantilla reutilizable</summary>
+      <div class="email-body">
+        <div class="email-field">Asunto</div>
+        <div class="email-subject">Te extranamos, [Nombre]</div>
+        <div class="email-field">Preview</div>
+        <div class="email-preview">Hace un tiempo que no sabemos de tu local. Todo bien?</div>
+        <div class="email-field">Cuerpo</div>
+        <div class="email-copy">
+          <p>Hola [Nombre],</p>
+          <p>Hace un tiempo que no recibimos un pedido tuyo, y quisimos escribirte directamente para saber como estas y si hay algo en lo que podamos ayudarte.</p>
+          <p>Sos parte de la familia DOU desde hace tiempo, y nos importa saber si hubo algun problema con una entrega, con el stock, o si simplemente cambio el ritmo de tu local. Lo que sea, queremos poder acompanarte.</p>
+          <p>Si queres retomar el pedido, o simplemente charlar sobre como te esta yendo, tu contacto comercial esta a un mensaje de distancia.</p>
+          <p>Esperamos volver a saber de vos pronto.</p>
+          <p>Equipo DOU Foods</p>
+          <p><span class="email-cta">Hablar con mi contacto comercial</span></p>
+        </div>
+        <div class="email-notes">Plantilla unica y reutilizable. El equipo comercial completa el nombre y, si tiene contexto, ajusta el segundo parrafo. No forma parte de un flujo automatico.</div>
+      </div>
+    </details>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ═══ TONO ═══ -->
+  <div class="section" id="tono">
+    <h2>Tono y Voz</h2>
+
+    <div class="seg-grid">
+      <div class="seg-card">
+        <h4>Si</h4>
+        <ul>
+          <li>Hablar de "vos" siempre (Argentina)</li>
+          <li>"Socio DOU" o "familiar DOU" como terminos</li>
+          <li>Reconocer el rol del socio en el negocio</li>
+          <li>Ser directo y transparente en temas sensibles</li>
+          <li>Firmar como "Equipo DOU Foods"</li>
+          <li>Frases cortas, claras, sin jerga</li>
+        </ul>
+      </div>
+      <div class="seg-card">
+        <h4>No</h4>
+        <ul>
+          <li>"DOU Gang" ni jerga de consumidor final</li>
+          <li>Monedas, puntos, niveles ni gamificacion</li>
+          <li>Emojis excesivos ni signos de exclamacion en cascada</li>
+          <li>Presion ni culpa en reactivacion o no-asistencia</li>
+          <li>Prometer nada sin confirmacion del equipo comercial</li>
+          <li>Tono de fiesta/irreverencia — esto es B2B</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ═══ KPIs ═══ -->
+  <div class="section" id="kpis">
+    <h2>KPIs</h2>
+    <p>Metricas practicas para B2B, sin componentes de puntos ni gamificacion. Revision mensual.</p>
+
+    <h3>Salud del email</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Metrica</th><th>Meta</th></tr></thead>
+        <tbody>
+          <tr><td>Tasa de apertura</td><td>35-45%</td></tr>
+          <tr><td>CTR (click-through rate)</td><td>8-12%</td></tr>
+          <tr><td>Tasa de rebote</td><td>&lt;2%</td></tr>
+          <tr><td>Tasa de baja</td><td>&lt;0.3% por campana</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Juntada DOU</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Metrica</th><th>Meta</th></tr></thead>
+        <tbody>
+          <tr><td>Tasa de RSVP sobre invitados</td><td>≥65%</td></tr>
+          <tr><td>Asistencia real sobre confirmados</td><td>≥80%</td></tr>
+          <tr><td>Conversion post-Juntada (pedido en 4 semanas)</td><td>Medir vs. baseline</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Lanzamiento Snack DOU</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Metrica</th><th>Meta</th></tr></thead>
+        <tbody>
+          <tr><td>Conversion de preventa (socios top invitados)</td><td>25-35%</td></tr>
+          <tr><td>Adopcion primer mes (base total con al menos 1 pedido)</td><td>≥40%</td></tr>
+          <tr><td>Ticket promedio pedido mixto vs. solo alfajor</td><td>+20%</td></tr>
+          <tr><td>Tasa de reorden (2do pedido en 45 dias)</td><td>Medir vs. baseline</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Impacto comercial general</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Metrica</th><th>Meta</th></tr></thead>
+        <tbody>
+          <tr><td>Pedidos atribuibles a email</td><td>Medir via codigos/links de pedido</td></tr>
+          <tr><td>Reactivacion win-back (pedido en 30 dias post-email)</td><td>≥10%</td></tr>
+          <tr><td>Cobertura estacional (pedidos dic-feb con snack)</td><td>Medir proporcion</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <p style="text-align:center;font-size:12px;color:var(--text-muted);padding:20px 0;">
+    DOU Foods — Estrategia B2B Distribuidores — Septiembre a Diciembre 2026<br>
+    5 campanas · 9 emails de lanzamiento · 4 promociones · 1 win-back mensual
+  </p>
+</main>
+
+<script>
+const sections = document.querySelectorAll('.section[id]');
+const navLinks = document.querySelectorAll('.nav a[href^="#"]');
+function updateActive() {
+  let current = '';
+  for (const section of sections) {
+    const rect = section.getBoundingClientRect();
+    if (rect.top <= 120) current = section.id;
+  }
+  navLinks.forEach(link => {
+    link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+  });
+}
+window.addEventListener('scroll', updateActive, { passive: true });
+updateActive();
+navLinks.forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.getElementById('nav').classList.remove('open');
+    }
+  });
+});
+</script>
